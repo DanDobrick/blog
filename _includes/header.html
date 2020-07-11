@@ -50,7 +50,7 @@
 			src="/assets/images/{{page.id}}/top.jpg" class="img-responsive">
 	{% endif %}
 	{% if page.is_post %}
-	<h1 class="post-title">{{page.title | markdownify}}</h1>
+		<h1 class="post-title">{{page.title | markdownify | remove: '<p>' | remove: '</p>'}}</h1>
 	{% else %}
 	<div class="jumbotron  clearfix">
 		<h1 class="text-center">{{ page.title }}</h1>
