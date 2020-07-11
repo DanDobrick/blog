@@ -1,8 +1,9 @@
 ---
 layout: default
+is_post: true
 ---
-
-{% if page.id %}
+<h1>{{ post.title }}</h1>
+<div class="post-container">
   <p>
     <strong>{{ page.published | date: '%B %d, %Y' }}</strong> ( last updated : {{ page.date | date: '%B %d, %Y' }} )
     <br>
@@ -10,6 +11,7 @@ layout: default
       <a class="label label-default" href="/tags/#{{ tag | slugify }}">{{ tag }}</a>
     {% endfor %}
   </p>
+
   {%if page.github %}
     <p>
       <a href="{{ page.github }}" class="btn btn-default">
@@ -17,14 +19,9 @@ layout: default
       </a>
     </p>
   {% endif %}
-{% endif %}
+  <hr />
 
-{{ content | markdownify}}
-
-{% if page.id %}
-  <p>Originally published {{ page.published | date: '%B %d, %Y' }}
-    <br> Latest update {{ page.date | date: '%B %d, %Y' }}
-  </p>
+  {{ content | markdownify}}
     
   <p><strong>Related posts :</strong></p>
   <ul>
@@ -41,5 +38,4 @@ layout: default
       {% endfor %}
     {% endfor %}
   </ul>
-{% endif %}
-  
+</div>

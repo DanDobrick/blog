@@ -1,20 +1,21 @@
 ---
-title: "PostgreSQL num_nulls and num_nonnulls functions"
-date: 2020-07-10 05:00:00 +0200
-published: 2020-07-10 05:00:00 +0200
+title: "PostgreSQL `num_nulls` and `num_nonnulls`"
+date: 2020-07-10
+published: 2020-07-10
 comments: true
 categories: development
 tags: [postgres, rails, ruby, active-record]
+is_post: true
 ---
-Postgres gives you a few functions to check how many columns in a row are null, which comes in handy when We want each row in this table to only have ONE non-null value in any `*_response` column, and I wanted to implement a DB constraint on top of the application-level validation to catch any race conditions (such as multiple entries being
-saved to the DB at the same time).
+![Postgres Logo](/assets/images/{{ page.id }}/postgres.png)
 
-This needs to be edited ^^^^
+PostgreSQL offers a few comparison functions that are very useful if your table has columns that require exactly one entry. I ran into a situation recently that utilized the `num_nonnulls` function combined with a DB constraint to ensure that only one of a group of tables had data.
 <!--more-->
-## PostgreSQL `num_nulls` and `num_nonnulls` functions
 
-I recently ran into a situation that required a data table that looked something like this:
+## Problem
+The table I was designing looked something like this:
 
+{: .table .table-striped}
 Column name | Data type | Notes
 ----------- | --------- | -----
 `bool_response` | boolean | Must be null if there is a value in any other `*_response` columns
@@ -24,10 +25,12 @@ Column name | Data type | Notes
 We want each row in this table to only have ONE non-null value in any `*_response` column, and I wanted to implement a DB constraint on top of the application-level validation to catch any race conditions (such as multiple entries being
 saved to the DB at the same time).
 
+## Solution
 Luckily I am using Postgres as our database which provides a [couple comparison functions](https://www.postgresql.org/docs/10/functions-comparison.html#FUNCTIONS-COMPARISON-FUNC-TABLE) that count the number of nulls in a set of columns: `num_nonnulls` and `num_nulls`.
 
 This table from the documentation linked above explains the two functions:
 
+{: .table .table-striped}
 Function | Description | Example | Example Result
 -------- | ----------- | ------- | --------------
 num_nonnulls(VARIADIC "any") | returns the number of `non-null` arguments | num_nonnulls(1, NULL, 2) | 2

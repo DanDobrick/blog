@@ -43,16 +43,17 @@
 			</div>
 		</div>
 	</nav>
-		{% if page.noimage %}
-		{% else %}
+	{% if page.noimage %}
+	{% else %}
 		<img
 			alt="{{ page.title }}"
 			src="/assets/images/{{page.id}}/top.jpg" class="img-responsive">
-		{% endif %}
-
+	{% endif %}
+	{% if page.is_post %}
+	<h1 class="post-title">{{page.title | markdownify}}</h1>
+	{% else %}
 	<div class="jumbotron  clearfix">
-
 		<h1 class="text-center">{{ page.title }}</h1>
-
 	</div>
+	{% endif %}
 </div>

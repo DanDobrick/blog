@@ -1,5 +1,0 @@
-I"Þ<p>Postgres gives you a few functions to check how many columns in a row are null, which comes in handy when We want each row in this table to only have ONE non-null value in any <code class="language-plaintext highlighter-rouge">*_response</code> column, and I wanted to implement a DB constraint on top of the application-level validation to catch any race conditions (such as multiple entries being
-saved to the DB at the same time).</p>
-
-<p>This needs to be edited ^^^^</p>
-:ET

@@ -1,0 +1,53 @@
+I"�<p>PostgreSQL offers a few comparison functions that are very useful if your table has columns that require exactly one entry. I ran into a situation recently that utilized the num_nonnulls function and created a writeup for it
+&lt;–more–&gt;
+Column name | Data type | Notes
+———– | ——— | —–
+bool_response | boolean | Must be null if there is a value in any other *_response columns
+int_response | integer | Must be null if there is a value in any other *_response columns
+text_response | text | Must be null if there is a value in any other *_response columns</p>
+
+<p>We want each row in this table to only have ONE non-null value in any *_response column, and I wanted to implement a DB constraint on top of the application-level validation to catch any race conditions (such as multiple entries being
+saved to the DB at the same time).</p>
+
+<p>Luckily I am using Postgres as our database which provides a couple comparison functions that count the number of nulls in a set of columns: num_nonnulls and num_nulls.</p>
+
+<p>This table from the documentation linked above explains the two functions:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Function
+  Description
+  Example
+  Example Result
+
+  
+  
+
+  num_nonnulls(VARIADIC “any”)
+  returns the number of non-null arguments
+  num_nonnulls(1, NULL, 2)
+  2
+
+
+  num_nulls(VARIADIC “any”)
+  returns the number of null arguments
+  num_nulls(1, NULL, 2)
+  1
+</code></pre></div></div>
+
+<p>I decided to use the first function (num_nonnulls), adding a constraint that checks those columns and ensure there is only a single non-null value:</p>
+
+<p>ALTER TABLE my_example_table
+    ADD CONSTRAINT only_one_non_null_response
+    CHECK (num_nonnulls(bool_response, int_response, text_response) = 1);</p>
+
+<p>Finally I paired this with an app-level validation (this project is using rails + ActiveRecord):</p>
+
+<p>class MyResponseClass &lt; ActiveRecord::Base
+    validate :only_one_response
+    # …
+    private def only_one_response
+        non_null_responses=[bool_response, int_response, text_response].compact if non_null_responses.count !=1
+        errors.add(:base, “Must only have a single response” )
+    end
+end</p>
+
+:ET
