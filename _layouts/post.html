@@ -1,0 +1,13 @@
+---
+layout: default
+---
+{% assign category_group = site.categories | where: 'category', page.category | first %}
+
+<h2>{{ page.title }}</h2>
+<p>{{category_group.display_name}} - {{ page.date | date_to_string }}</p>
+
+{{ content }}
+
+<p>
+  - <a href="{{ category_group.url }}">Other posts about {{category_group.display_name}}</a>
+</p>

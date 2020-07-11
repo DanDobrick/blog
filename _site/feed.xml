@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-07-11T07:39:35-06:00</updated><id>http://localhost:4000/feed.xml</id><entry><title type="html">Bananas</title><link href="http://localhost:4000/postgres/2020/07/10/bananas.html" rel="alternate" type="text/html" title="Bananas" /><published>2020-07-10T00:00:00-06:00</published><updated>2020-07-10T00:00:00-06:00</updated><id>http://localhost:4000/postgres/2020/07/10/bananas</id><content type="html" xml:base="http://localhost:4000/postgres/2020/07/10/bananas.html">&lt;h1 id=&quot;postgresql-num_nulls-and-num_nonnulls-functions&quot;&gt;PostgreSQL &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;num_nulls&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;num_nonnulls&lt;/code&gt; functions&lt;/h1&gt;
+
+&lt;p&gt;I recently ran into a situation that required a data table that looked something like this:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Column name&lt;/th&gt;
+      &lt;th&gt;Data type&lt;/th&gt;
+      &lt;th&gt;Notes&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bool_response&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;boolean&lt;/td&gt;
+      &lt;td&gt;Must be null if there is a value in any other &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*_response&lt;/code&gt; columns&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int_response&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;integer&lt;/td&gt;
+      &lt;td&gt;Must be null if there is a value in any other &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*_response&lt;/code&gt; columns&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;text_response&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;text&lt;/td&gt;
+      &lt;td&gt;Must be null if there is a value in any other &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*_response&lt;/code&gt; columns&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;We want each row in this table to only have ONE non-null value in any &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*_response&lt;/code&gt; column, and I wanted to implement a DB constraint on top of the application-level validation to catch any race conditions (such as multiple entries being saved to the DB at the same time).&lt;/p&gt;
+
+&lt;p&gt;Luckily I am using Postgres as our database which provides a &lt;a href=&quot;https://www.postgresql.org/docs/10/functions-comparison.html#FUNCTIONS-COMPARISON-FUNC-TABLE&quot;&gt;couple comparison functions&lt;/a&gt; that count the number of nulls in a set of columns: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;num_nonnulls&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;num_nulls&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;This table from the documentation linked above explains the two functions:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Function&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+      &lt;th&gt;Example&lt;/th&gt;
+      &lt;th&gt;Example Result&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;num_nonnulls(VARIADIC “any”)&lt;/td&gt;
+      &lt;td&gt;returns the number of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;non-null&lt;/code&gt; arguments&lt;/td&gt;
+      &lt;td&gt;num_nonnulls(1, NULL, 2)&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;num_nulls(VARIADIC “any”)&lt;/td&gt;
+      &lt;td&gt;returns the number of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;null&lt;/code&gt; arguments&lt;/td&gt;
+      &lt;td&gt;num_nulls(1, NULL, 2)&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;I decided to use the first function (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;num_nonnulls&lt;/code&gt;), adding a constraint that checks those columns and ensure there is only a single non-null value:&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;ALTER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;my_example_table&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;ADD&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;CONSTRAINT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;only_one_non_null_response&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;CHECK&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num_nonnulls&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bool_response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;int_response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;text_response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Finally I paired this with an app-level validation (this project is using rails + ActiveRecord):&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyResponseClass&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;validate&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:only_one_response&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
+
+&lt;span class=&quot;kp&quot;&gt;private&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;only_one_response&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;non_null_responses&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bool_response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;int_response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;text_response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;compact&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;non_null_responses&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;errors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:base&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Must only have a single response&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="postgres" /><summary type="html">PostgreSQL num_nulls and num_nonnulls functions</summary></entry><entry><title type="html">Ruby Stuff</title><link href="http://localhost:4000/ruby/2020/07/10/ruby-stuff.html" rel="alternate" type="text/html" title="Ruby Stuff" /><published>2020-07-10T00:00:00-06:00</published><updated>2020-07-10T00:00:00-06:00</updated><id>http://localhost:4000/ruby/2020/07/10/ruby-stuff</id><content type="html" xml:base="http://localhost:4000/ruby/2020/07/10/ruby-stuff.html">&lt;h1 id=&quot;rubyyyy&quot;&gt;RUBYYYY&lt;/h1&gt;
+&lt;p&gt;What&lt;/p&gt;
+&lt;h2 id=&quot;i-like&quot;&gt;I like&lt;/h2&gt;
+&lt;p&gt;writing Ruby&lt;/p&gt;</content><author><name></name></author><category term="ruby" /><summary type="html">RUBYYYY What I like writing Ruby</summary></entry></feed>

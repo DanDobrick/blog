@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bananas</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+      <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" />
+      <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Bananas</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Bananas" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="PostgreSQL num_nulls and num_nonnulls functions" />
+<meta property="og:description" content="PostgreSQL num_nulls and num_nonnulls functions" />
+<link rel="canonical" href="http://localhost:4000/postgres/2020/07/10/bananas.html" />
+<meta property="og:url" content="http://localhost:4000/postgres/2020/07/10/bananas.html" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-07-10T00:00:00-06:00" />
+<script type="application/ld+json">
+{"description":"PostgreSQL num_nulls and num_nonnulls functions","@type":"BlogPosting","headline":"Bananas","dateModified":"2020-07-10T00:00:00-06:00","url":"http://localhost:4000/postgres/2020/07/10/bananas.html","datePublished":"2020-07-10T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/postgres/2020/07/10/bananas.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+  <body>
+    <nav>
+  
+    <a href="/" >
+      Home
+    </a>
+  
+    <a href="/about.html" >
+      About
+    </a>
+  
+    <a href="/blog.html" >
+      Blog
+    </a>
+  
+    <a href="/categories.html" >
+      Categories
+    </a>
+  
+</nav>
+
+    
+
+<h2>Bananas</h2>
+<p>Postgres - 10 Jul 2020</p>
+
+<h1 id="postgresql-num_nulls-and-num_nonnulls-functions">PostgreSQL <code class="language-plaintext highlighter-rouge">num_nulls</code> and <code class="language-plaintext highlighter-rouge">num_nonnulls</code> functions</h1>
+
+<p>I recently ran into a situation that required a data table that looked something like this:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Column name</th>
+      <th>Data type</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">bool_response</code></td>
+      <td>boolean</td>
+      <td>Must be null if there is a value in any other <code class="language-plaintext highlighter-rouge">*_response</code> columns</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">int_response</code></td>
+      <td>integer</td>
+      <td>Must be null if there is a value in any other <code class="language-plaintext highlighter-rouge">*_response</code> columns</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">text_response</code></td>
+      <td>text</td>
+      <td>Must be null if there is a value in any other <code class="language-plaintext highlighter-rouge">*_response</code> columns</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We want each row in this table to only have ONE non-null value in any <code class="language-plaintext highlighter-rouge">*_response</code> column, and I wanted to implement a DB constraint on top of the application-level validation to catch any race conditions (such as multiple entries being saved to the DB at the same time).</p>
+
+<p>Luckily I am using Postgres as our database which provides a <a href="https://www.postgresql.org/docs/10/functions-comparison.html#FUNCTIONS-COMPARISON-FUNC-TABLE">couple comparison functions</a> that count the number of nulls in a set of columns: <code class="language-plaintext highlighter-rouge">num_nonnulls</code> and <code class="language-plaintext highlighter-rouge">num_nulls</code>.</p>
+
+<p>This table from the documentation linked above explains the two functions:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Description</th>
+      <th>Example</th>
+      <th>Example Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>num_nonnulls(VARIADIC “any”)</td>
+      <td>returns the number of <code class="language-plaintext highlighter-rouge">non-null</code> arguments</td>
+      <td>num_nonnulls(1, NULL, 2)</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>num_nulls(VARIADIC “any”)</td>
+      <td>returns the number of <code class="language-plaintext highlighter-rouge">null</code> arguments</td>
+      <td>num_nulls(1, NULL, 2)</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>I decided to use the first function (<code class="language-plaintext highlighter-rouge">num_nonnulls</code>), adding a constraint that checks those columns and ensure there is only a single non-null value:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">my_example_table</span>
+    <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="n">only_one_non_null_response</span>
+        <span class="k">CHECK</span> <span class="p">(</span><span class="n">num_nonnulls</span><span class="p">(</span><span class="n">bool_response</span><span class="p">,</span> <span class="n">int_response</span><span class="p">,</span> <span class="n">text_response</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Finally I paired this with an app-level validation (this project is using rails + ActiveRecord):</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MyResponseClass</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+
+<span class="n">validate</span> <span class="ss">:only_one_response</span>
+
+<span class="c1"># ...</span>
+
+<span class="kp">private</span>
+
+<span class="k">def</span> <span class="nf">only_one_response</span>
+    <span class="n">non_null_responses</span> <span class="o">=</span> <span class="p">[</span><span class="n">bool_response</span><span class="p">,</span> <span class="n">int_response</span><span class="p">,</span> <span class="n">text_response</span><span class="p">].</span><span class="nf">compact</span>
+
+    <span class="k">if</span> <span class="n">non_null_responses</span><span class="p">.</span><span class="nf">count</span> <span class="o">!=</span> <span class="mi">1</span>
+      <span class="n">errors</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="ss">:base</span><span class="p">,</span> <span class="s2">"Must only have a single response"</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+
+<p>
+  - <a href="/categories/postgres.html">Other posts about Postgres</a>
+</p>
+
+  </body>
+</html>
+
