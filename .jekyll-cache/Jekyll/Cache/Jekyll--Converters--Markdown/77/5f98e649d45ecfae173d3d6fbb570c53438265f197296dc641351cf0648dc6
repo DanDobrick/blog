@@ -1,2 +1,0 @@
-I""<p>PostgreSQL offers a few comparison functions that are very useful if your table has columns that require exactly one entry. I ran into a situation recently that utilized the <code class="language-plaintext highlighter-rouge">num_nonnulls</code> function and created a writeup for it</p>
-:ET

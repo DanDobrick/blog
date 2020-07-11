@@ -1,9 +1,9 @@
 ---
 title: "draft"
-date: 2019-07-11 05:00:00 +0200
-published: 2019-07-11 05:00:00 +0200
-comments: true
-categories: development
+date: 2030-07-11
+published: 2030-07-11
+is_post: true
+categories: category
 tags: [test,test2]
 github: "https://github.com/dandobrick/"
 noimage: true

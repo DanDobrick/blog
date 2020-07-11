@@ -2,8 +2,6 @@
 Blog using jekyll, ideally it will live at blog.dandobrick.com and host the various things I think of.
 
 # Todo
-- Add CSS to make table pretty
-- Move from CSS to scss
 - "Rules in board games that I forget about"
   - Gloomhaven new charcater perks and level <= prosperity
 
