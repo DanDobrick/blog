@@ -1,0 +1,29 @@
+# Change 'comments' to true for Disqus comments
+disqus:
+  comments: false
+
+menu: 
+  # - name: Featured Projects
+  #   submenu:
+  #     - name: MicroBam
+  #       link: /projects/microbam
+  #     - name: OurLegacy
+  #       link: /projects/ourlegacy
+  - name: Posts
+    link: /
+  - name: Tags
+    link: /tags
+  - name: About
+    link: /about
+  - name: Follow me
+    submenu:
+      - name: GitHub
+        icon: github
+        link: http://github.com/DanDobrick
+      - name: LinkedIn
+        icon: linkedin-square
+        link: http://www.linkedin.com/in/DanDobrick
+      - name: Twitter
+        icon: twitter
+        link: https://twitter.com/DanDobrick
+    

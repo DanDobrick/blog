@@ -1,0 +1,50 @@
+---
+title: About
+permalink: /about/
+---
+<h1>Meet me!</h1>
+<h4>General Info</h4>
+<strong>Name:</strong> Dan Dobrick
+<br>
+<strong>Pronouns:</strong> He/Him
+<br>
+<strong>Location:</strong> Denver
+
+<h4>Who I am</h4>
+<p>
+  I'm a big proponent of starting off introductions with things that aren't about work, we're all people who live <a href="https://en.wiktionary.org/wiki/sonder#Noun">interesting lives</a> after-all right?
+</p>
+<ul>
+  <li>
+    {% capture currentDate %}{{ site.time | date: '%s' }}{% endcapture %}
+    {% assign birthDate = '04-03-2018 03:57:00' | date: '%s' %}
+    {% assign ageInSeconds = currentDate | minus: birthDate %}
+    {% assign age = ageInSeconds | divided_by: 31557600 %}
+    I'm a father of a wonderful {{ age }} year old boy.
+  </li>
+  <li>
+    I'm a big fan of the Phillies and try to watch as many games as I can; my favorite player is a tie between <a href="https://www.baseball-reference.com/players/k/kingesc01.shtml">Scott Kingery</a> and <a href="https://www.baseball-reference.com/players/r/realmjt01.shtml">J.T. Realmuto</a>.
+  </li>
+  <li>
+    I'm an avid boardgamer who tries to play at least 1x a week.
+  </li>
+  <li>
+    I've just started a couple D&D campaigns with my wife and been enjoying it as both player and DM.
+  </li>
+</ul>
+
+<h4>Me as a Worker</h4>
+<p>
+  I mostly work with Ruby and Rails professionally, but love learning new technologies and expanding my tool belt.
+</p>
+<p>
+  Writing software allows me to create something that will affect people's lives in positive ways while also learning new things each day. Coming from a background in education, I try to ensure that whatever I'm currently working on is intellectually stimulating while also bettering the lives of other people.
+</p>
+<p>
+  I'm currently working as a software engineer for <a href="htps://www.mybrightwheel.com">Brightwheel</a> a vertical sass company for daycare providers.
+</p>
+
+<h4>Reach Out:</h4>
+<p>
+{% include contact.html %}
+</p>

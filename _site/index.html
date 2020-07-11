@@ -1,45 +1,236 @@
 <!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Home</title>
-    <link rel="stylesheet" href="/assets/css/styles.css">
-      <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" />
-      <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Home</title>
-<meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Home" />
-<meta property="og:locale" content="en_US" />
-<link rel="canonical" href="http://localhost:4000/" />
-<meta property="og:url" content="http://localhost:4000/" />
-<script type="application/ld+json">
-{"@type":"WebSite","headline":"Home","url":"http://localhost:4000/","@context":"https://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <link rel="shortcut icon" type="image/png" href="/icon.png" />
 
-  </head>
-  <body>
-    <nav>
-  
-    <a href="/"  class="current" >
-      Home
-    </a>
-  
-    <a href="/about.html" >
-      About
-    </a>
-  
-    <a href="/blog.html" >
-      Blog
-    </a>
-  
-    <a href="/categories.html" >
-      Categories
-    </a>
-  
-</nav>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@koint">
+  <meta name="twitter:creator" content="@koint">
 
-    <h1>hello world!</h1>
+  <!-- SEO stuff -->
+  <title>Dan's Tech Blog</title>
+  <meta property="og:title" content="Dan's Tech Blog" />
+  <meta name="twitter:title" content="Dan's Tech Blog">
 
-  </body>
+
+  
+	  <meta name="description" content="Sharing about Application Development, Integration, Cloud, Big Data and Digital Transformation" />
+	  <meta property="og:description" content="Sharing about Application Development, Integration, Cloud, Big Data and Digital Transformation" />
+	  <meta name="twitter:description" content="Sharing about Application Development, Integration, Cloud, Big Data and Digital Transformation">
+
+  
+  <link rel="canonical" href="http://0.0.0.0:4000/" />
+  <meta property="og:url" content="http://0.0.0.0:4000/" />
+  <meta name="twitter:url" content="http://0.0.0.0:4000/">
+
+  <meta property="og:site_name" content="Dan's Tech Blog" />
+  <meta property="og:image" content="http://0.0.0.0:4000/assets/images//top.jpg" />
+  <meta name="twitter:image" content="http://0.0.0.0:4000/assets/images//top.jpg">
+
+   <!-- its not an article -->
+  	<meta property="og:type" content="website" />
+
+  	    <script type="application/ld+json">
+{"@context": "http://schema.org",
+"@type": "WebSite",
+"headline": "Dan's Tech Blog",
+  
+"description": "Sharing about Application Development, Integration, Cloud, Big Data and Digital Transformation",
+  
+"url": "http://0.0.0.0:4000/"}</script>
+  
+
+  <link rel="author" href="http://www.linkedin.com/in/dandobrick"/>
+
+   <!-- End SEO stuff -->
+
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/assets/css/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+   <link href="/assets/css/syntax.css" rel="stylesheet">
+
+  <script src="/assets/js/jquery.min.js"></script>
+  <script src="/assets/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+	<div>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button class="navbar-toggle collapsed" type="button"
+					data-toggle="collapse" data-target="#navbar-collapse-menu">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/"> <i class="fa fa-barcode"></i>
+				</a>
+			</div>
+			<div id="navbar-collapse-menu" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+
+					
+						<!-- If has submenus -->
+						
+							<li><a href="/">Posts</a></li>
+						
+					
+						<!-- If has submenus -->
+						
+							<li><a href="/tags">Tags</a></li>
+						
+					
+						<!-- If has submenus -->
+						
+							<li><a href="/about">About</a></li>
+						
+					
+						<!-- If has submenus -->
+						
+						<li class="dropdown">
+							<a class="dropdown-toggle"	data-toggle="dropdown" href="#">
+								Follow me
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								
+									<li>
+										<a href="http://github.com/DanDobrick">
+											
+											<i class="fa fa-inverse fa-github fa-2x"></i>
+											
+											GitHub
+										</a>
+									</li>
+								
+									<li>
+										<a href="http://www.linkedin.com/in/DanDobrick">
+											
+											<i class="fa fa-inverse fa-linkedin-square fa-2x"></i>
+											
+											LinkedIn
+										</a>
+									</li>
+								
+									<li>
+										<a href="https://twitter.com/DanDobrick">
+											
+											<i class="fa fa-inverse fa-twitter fa-2x"></i>
+											
+											Twitter
+										</a>
+									</li>
+								
+								</ul>
+							</li>
+						
+					
+				</ul>
+			</div>
+		</div>
+	</nav>
+		
+		<img
+			alt="Dan's Tech Blog"
+			src="/assets/images//top.jpg" class="img-responsive">
+		
+
+	<div class="jumbotron  clearfix">
+
+		<h1 class="text-center">Dan's Tech Blog</h1>
+
+	</div>
+</div>
+
+	<div class="container">
+
+	<!-- Pagination links -->
+
+
+<div class="list-group">
+	 
+	<div class="list-group-item">
+	<a href="/posts/postgresql-null-functions/">
+		<h4 class="list-group-item-heading">PostgreSQL num_nulls and num_nonnulls functions</h4>
+		<h6 class="list-group-item-heading">July 10,
+			2020 | (Last Update : July 09, 2020)</h6></a>
+		
+		<a class="label label-default" href="/tags/#postgres">postgres</a>
+		
+		<a class="label label-default" href="/tags/#rails">rails</a>
+		
+		<a class="label label-default" href="/tags/#ruby">ruby</a>
+		
+		<a class="label label-default" href="/tags/#active-record">active-record</a>
+		
+				
+		<img
+			alt="PostgreSQL num_nulls and num_nonnulls functions"
+			src="/assets/images//posts/postgresql-null-functions/top.jpg" class="img-responsive">
+		
+		<p>Postgres gives you a few functions to check how many columns in a row are null, which comes in handy when We want each row in this table to only have ONE non-null value in any *_response column, and I wanted to implement a DB constraint on top of the application-level validation to catch any race conditions (such as multiple entries being
+saved to the DB at the same time).
+
+This needs to be edited ^^^^
+</p>
+		<a href="/posts/postgresql-null-functions/">Read more...</a>
+
+	</div>
+	 
+	<div class="list-group-item">
+	<a href="/posts/quarkus-camel-first-impressions-on-a-game-changing-framework/">
+		<h4 class="list-group-item-heading">Quarkus Camel, First Impressions on a Game Changing Framework</h4>
+		<h6 class="list-group-item-heading">March 15,
+			2019 | (Last Update : July 03, 2019)</h6></a>
+		
+		<a class="label label-default" href="/tags/#quarkus">quarkus</a>
+		
+		<a class="label label-default" href="/tags/#kubernetes">kubernetes</a>
+		
+		<a class="label label-default" href="/tags/#camel">camel</a>
+		
+				
+		<img
+			alt="Quarkus Camel, First Impressions on a Game Changing Framework"
+			src="/assets/images//posts/quarkus-camel-first-impressions-on-a-game-changing-framework/top.jpg" class="img-responsive">
+		
+		<p>
+    On March 07, 2019 Red Hat & the JBoss Community announced Quarkus. It is a Java framework that enables ultra low
+    boot
+    times and tiny
+    memory footprint for applications and services. It does that by taking advantage of GraalVM's native compilation
+    capabilities to produce an executable out of your Java code. Why is this considered to be a game
+    changer ?
+    In this article I will give my view and first impressions on this framework as someone who spends
+    a bit of time writing applications and services. I will get my hands dirty by building a
+    working Quarkus + Apache Camel example.
+
+</p>
+		<a href="/posts/quarkus-camel-first-impressions-on-a-game-changing-framework/">Read more...</a>
+
+	</div>
+	
+</div>
+<!-- Pagination links -->
+
+
+
+
+	</div>
+	<footer class="footer">
+	<ul class="footer-links">
+		<li><a href="https://github.com/dandobrick"> <i
+				class="fa fa-inverse fa-github fa-3x"></i></a></li>
+		<li><a href="https://www.linkedin.com/in/dandobrick"> <i
+				class="fa fa-inverse fa-linkedin-square fa-3x"></i></a></li>
+		<li><a href="https://twitter.com/dandobrick"> <i
+				class="fa fa-inverse fa-twitter fa-3x"></i></a></li>
+	</ul>
+</footer>
+
+</body>
 </html>
-
