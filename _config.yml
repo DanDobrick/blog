@@ -17,7 +17,8 @@ title: Dan's Tech Blog
 name: Dan's Tech Blog
 description: 
   Tech blog to share things that I have learned or find interesting!
-baseurl: "/blog"
+baseurl: /blog
+url: dandobrick.com
 github_username:  dandobrick
 
 # Default layouts
