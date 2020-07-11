@@ -8,7 +8,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/"> <i class="fa fa-barcode"></i>
+				<a class="navbar-brand" href="{{site.baseurl}} WTF"> <i class="fa fa-barcode"></i>
 				</a>
 			</div>
 			<div id="navbar-collapse-menu" class="collapse navbar-collapse">
@@ -25,7 +25,7 @@
 							<ul class="dropdown-menu">
 								{% for subitem in item.submenu %}
 									<li>
-										<a href="{{subitem.link}}">
+										<a href="{{subitem.link | prepend:site.baseurl}}">
 											{% if subitem.icon %}
 											<i class="fa fa-inverse fa-{{subitem.icon}} fa-2x"></i>
 											{% endif %}
@@ -36,7 +36,7 @@
 								</ul>
 							</li>
 						{% else %}
-							<li><a href="{{item.link}}">{{item.name}}</a></li>
+							<li><a href="{{item.link | prepend:site.baseurl}}">{{item.name}}</a></li>
 						{% endif %}
 					{% endfor %}
 				</ul>
@@ -47,7 +47,7 @@
 	{% else %}
 		<img
 			alt="{{ page.title }}"
-			src="/assets/images/{{page.id}}/top.jpg" class="img-responsive">
+			src="{{ site.baseurl}}/assets/images/{{page.id}}/top.jpg" class="img-responsive">
 	{% endif %}
 	{% if page.is_post %}
 		<h1 class="post-title">{{page.title | markdownify | remove: '<p>' | remove: '</p>'}}</h1>

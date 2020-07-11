@@ -1,7 +1,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-  <link rel="shortcut icon" type="image/png" href="/icon.png" />
+  <link rel="shortcut icon" type="image/png" href="{{ site.baseurl }}/icon.png" />
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@koint">
@@ -23,13 +23,13 @@
 	  <meta property="og:description" content="{{page.excerpt | strip_html| strip}}" />
 	  <meta name="twitter:description" content="{{page.excerpt | strip_html| strip}}">
   {% endif %}
-  <link rel="canonical" href="{{site.url}}{{page.url}}" />
-  <meta property="og:url" content="{{site.url}}{{page.url}}" />
-  <meta name="twitter:url" content="{{site.url}}{{page.url}}">
+  <link rel="canonical" href="{{site.url | append:site.baseurl }}{{page.url}}" />
+  <meta property="og:url" content="{{site.url | append:site.baseurl }}{{page.url}}" />
+  <meta name="twitter:url" content="{{site.url | append:site.baseurl }}{{page.url}}">
 
   <meta property="og:site_name" content="{{site.name}}" />
-  <meta property="og:image" content="{{site.url}}/assets/images/{{page.id}}/top.jpg" />
-  <meta name="twitter:image" content="{{site.url}}/assets/images/{{page.id}}/top.jpg">
+  <meta property="og:image" content="{{site.url | append:site.baseurl }}/assets/images/{{page.id}}/top.jpg" />
+  <meta name="twitter:image" content="{{site.url | append:site.baseurl }}/assets/images/{{page.id}}/top.jpg">
 
   {% if page.id %} <!-- if it's an article -->
   <meta property="og:type" content="article" />
@@ -60,7 +60,7 @@
   {% else %}
 "description": "{{page.excerpt | strip_html}}",
   {% endif %}
-"url": "{{site.url}}{{page.url}}"}</script>
+"url": "{{site.url | prepend:site.baseurl }}{{page.url}}"}</script>
 
   {% else %} <!-- its not an article -->
   	<meta property="og:type" content="website" />
@@ -74,20 +74,18 @@
   {% else %}
 "description": "{{page.excerpt | strip_html}}",
   {% endif %}
-"url": "{{site.url}}{{page.url}}"}</script>
+"url": "{{site.url | prepend:site.baseurl }}{{page.url}}"}</script>
   {% endif %}
 
   <link rel="author" href="{{site.author}}"/>
 
    <!-- End SEO stuff -->
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/styles.css">
+  <link href="{{ site.baseurl }}/assets/css/syntax.css" rel="stylesheet">
 
-  <base href="{{ site.root }}"> 
-  <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/assets/css/font-awesome/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="/assets/css/styles.css">
-  <link href="/assets/css/syntax.css" rel="stylesheet">
-
-  <script src="/assets/js/jquery.min.js"></script>
-  <script src="/assets/js/bootstrap.min.js"></script>
+  <script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>
+  <script src="{{ site.baseurl }}/assets/js/bootstrap.min.js"></script>
 
 </head>

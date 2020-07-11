@@ -7,7 +7,7 @@ categories: development
 tags: [postgres, rails, ruby, active-record]
 is_post: true
 ---
-![Postgres Logo](/assets/images/{{ page.id }}/postgres.png)
+![Postgres Logo]({{ site.baseurl }}/assets/images/{{ page.id }}/postgres.png)
 
 PostgreSQL offers a few comparison functions that are very useful if your table has columns that require exactly one entry. I ran into a situation recently that utilized the `num_nonnulls` function combined with a DB constraint to ensure that only one of a group of tables had data.
 <!--more-->

@@ -8,7 +8,7 @@ is_post: true
     <strong>{{ page.published | date: '%B %d, %Y' }}</strong> ( last updated : {{ page.date | date: '%B %d, %Y' }} )
     <br>
     {% for tag in page.tags %}
-      <a class="label label-default" href="/tags/#{{ tag | slugify }}">{{ tag }}</a>
+      <a class="label label-default" href="{{ site.baseurl }}/tags/#{{ tag | slugify }}">{{ tag }}</a>
     {% endfor %}
   </p>
 
@@ -29,7 +29,7 @@ is_post: true
       {% for tag in page.tags %}
         {% if allpost.tags contains tag and allpost.id != page.id %}
           <li>
-            <a href="{{ allpost.url }}">
+            <a href="{{ allpost.url | prepend:site.baseurl }}">
               {{ allpost.title }}
             </a>
           </li>
