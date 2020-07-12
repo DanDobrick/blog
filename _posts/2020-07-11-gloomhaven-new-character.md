@@ -1,5 +1,5 @@
 ---
-title: "Things I Forgot About When Creating a new Character in Gloomhaven"
+title: "Things I Forget About When Creating a New Character in Gloomhaven"
 date: 2020-07-11
 published: 2020-07-11
 categories: boardgames
