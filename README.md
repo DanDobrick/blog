@@ -4,9 +4,8 @@ Blog using jekyll that lives at [the above url](https://www.dandobrick.com/blog)
 Theme taken from https://github.com/alainpham/alainpham.github.io, then modified a WHOLE bunch.
 
 # Todo
+- Setup something for categories
 - dotfile post
-- "Rules in board games that I forget about"
-  - Gloomhaven new charcater perks and level <= prosperity
 - [Update profile with github actions](https://simonwillison.net/2020/Jul/10/self-updating-profile-readme/)
 
 # License
