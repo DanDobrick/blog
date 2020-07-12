@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://0.0.0.0:4000/blog/posts/dotfile-shenanigans/</loc>
+<loc>/blog/posts/dotfile-shenanigans/</loc>
 <lastmod>2020-07-09T00:00:00-06:00</lastmod>
 </url>
 <url>
-<loc>http://0.0.0.0:4000/blog/posts/postgresql-null-functions/</loc>
+<loc>/blog/posts/postgresql-null-functions/</loc>
 <lastmod>2020-07-10T00:00:00-06:00</lastmod>
 </url>
 <url>
-<loc>http://0.0.0.0:4000/blog/posts/gloomhaven-new-character/</loc>
+<loc>/blog/posts/gloomhaven-new-character/</loc>
 <lastmod>2020-07-11T00:00:00-06:00</lastmod>
 </url>
 <url>
-<loc>http://0.0.0.0:4000/blog/about/</loc>
+<loc>/blog/about/</loc>
 </url>
 <url>
-<loc>http://0.0.0.0:4000/blog/projects/draft/</loc>
+<loc>/blog/projects/draft/</loc>
 </url>
 <url>
-<loc>http://0.0.0.0:4000/blog/</loc>
+<loc>/blog/</loc>
 </url>
 <url>
-<loc>http://0.0.0.0:4000/blog/tags/</loc>
+<loc>/blog/tags/</loc>
 </url>
 </urlset>
