@@ -3,7 +3,7 @@ title: "PostgreSQL `num_nulls` and `num_nonnulls`"
 date: 2020-07-10
 published: 2020-07-10
 comments: true
-categories: development
+categories: software
 tags: [postgres, rails, ruby, active-record]
 is_post: true
 excerpt: PostgreSQL offers a few comparison functions that are very useful if your table has columns that require exactly one entry. I ran into a situation recently that utilized the `num_nonnulls` function combined with a DB constraint to ensure that only one of a group of tables had data.
