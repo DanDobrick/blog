@@ -1,10 +1,4 @@
 menu: 
-  # - name: Featured Projects
-  #   submenu:
-  #     - name: MicroBam
-  #       link: /projects/microbam
-  #     - name: OurLegacy
-  #       link: /projects/ourlegacy
   - name: Posts
     link: /
   - name: Tags
