@@ -24,10 +24,6 @@ body {
 	text-align: center;
 }
 
-.container {
-	font-size: 1.3em;
-}
-
 .jumbotron {
 	background: #719d7d;
 	padding-top: 20px;
@@ -41,6 +37,10 @@ body {
 		text-transform: uppercase;
 		letter-spacing: 0.2em;
 	}
+}
+
+.container {
+	font-size: 1.3em;
 }
 
 .footer {
@@ -67,6 +67,19 @@ body {
 	}
 }
 
+.post-container {
+	img {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	h3 {
+		font-size: 25px;
+	}
+}
+
+// Below this line there's just confusing navbar css that came from Jekyll template
 .navbar-default {
 	background-color: black;
 	border-color: #12421f;
@@ -156,18 +169,6 @@ navbar-brand:hover, .navbar-default .navbar-brand:focus
 
 .navbar-default .navbar-link:hover {
 	color: #ffffff;
-}
-
-.post-container {
-	img {
-		display: block;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	h3 {
-		font-size: 25px;
-	}
 }
 
 @media ( max-width : 767px) {

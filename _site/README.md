@@ -5,7 +5,6 @@ Theme taken from https://github.com/alainpham/alainpham.github.io, then modified
 
 # Todo
 - Setup something for categories
-- dotfile post
 - [Update profile with github actions](https://simonwillison.net/2020/Jul/10/self-updating-profile-readme/)
 
 # License
