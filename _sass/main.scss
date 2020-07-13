@@ -22,10 +22,21 @@ body {
 
 .top-image {
 	width: 100%;
+	border: 1px solid black;
 }
 
 .not-found-text {
 	text-align: center;
+}
+
+.related-posts {
+	padding-bottom: 2em;
+
+	hr {
+		padding-top: 1em;
+		border: none;
+		border-bottom: 1px solid black;
+	}
 }
 
 .jumbotron {
