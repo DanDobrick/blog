@@ -1,7 +1,7 @@
 ---
 title: "TIL - Some stuff about Active Record"
-date: 2020-7-10
-published: 2020-7-10
+date: 2020-7-13
+published: 2020-7-13
 comments: true
 categories: til
 tags: [til, ruby, active-record]
