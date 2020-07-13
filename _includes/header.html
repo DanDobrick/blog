@@ -48,10 +48,11 @@
 		</div>
 	</nav>
 	{% if page.noimage %}
+		<!-- TODO: ADD  JUMBOTRON-->
 	{% else %}
 		<img
 			alt="{{ page.title }}"
-			src="{{ site.baseurl}}/assets/images/{{page.id}}/top.jpg" class="img-responsive">
+			src="{{ site.baseurl}}/assets/images/{{page.id}}/top.jpg" class="img-responsive top-image">
 	{% endif %}
 	{% if page.is_post %}
 		<h1 class="post-title">{{page.title | markdownify | remove: '<p>' | remove: '</p>'}}</h1>

@@ -4,6 +4,8 @@ Blog using jekyll that lives at [the above url](https://www.dandobrick.com/blog)
 Theme taken from https://github.com/alainpham/alainpham.github.io, then modified a WHOLE bunch.
 
 # Todo
+- Post header needs to have same width as post
+- Add Jumbotron if post doesn't have image
 - Add TIL category
 - [Update profile with github actions](https://simonwillison.net/2020/Jul/10/self-updating-profile-readme/)
 - Once I have a handful of posts:
