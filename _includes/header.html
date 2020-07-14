@@ -8,7 +8,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="{{ site.baseurl }}"> <i class="fa fa-barcode"></i>
+				<a class="navbar-brand" href="{{ site.baseurl }}/"> <i class="fa fa-barcode"></i>
 				</a>
 			</div>
 			<div id="navbar-collapse-menu" class="collapse navbar-collapse">
@@ -47,18 +47,12 @@
 			</div>
 		</div>
 	</nav>
-	{% if page.noimage %}
-		<!-- TODO: ADD  JUMBOTRON-->
-	{% else %}
-		<img
-			alt="{{ page.title }}"
-			src="{{ site.baseurl}}/assets/images/{{page.id}}/top.jpg" class="img-responsive top-image">
-	{% endif %}
+
 	{% if page.is_post %}
-		<h1 class="post-title">{{page.title | markdownify | remove: '<p>' | remove: '</p>'}}</h1>
+		<div class="jumbotron  clearfix"></div>
 	{% else %}
-	<div class="jumbotron  clearfix">
-		<h1 class="text-center">{{ page.title }}</h1>
-	</div>
+		<div class="jumbotron  clearfix">
+			<h1 class="text-center">{{ page.title }}</h1>
+		</div>
 	{% endif %}
 </div>

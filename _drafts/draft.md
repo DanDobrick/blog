@@ -1,14 +1,15 @@
 ---
+is_post: true
 title: "draft"
 date: 2030-07-11
 published: 2030-07-11
-is_post: true
 categories: category
-tags: [test,test2]
+tags: [test, test2]
 github: "https://github.com/dandobrick/"
-noimage: true
+no_image: true
+excerpt: 
 ---
-Hello This is a good one.
+This is also the excerpt
 <!--more-->
 
 ## Test Title 1

@@ -2,7 +2,13 @@
 layout: default
 is_post: true
 ---
-<h1>{{ post.title }}</h1>
+{% if page.no_image %}
+  <!-- TODO: ADD  JUMBOTRON-->
+{% else %}
+  <img alt="{{ page.title }}" src="{{ site.baseurl}}/assets/images/{{page.id}}/top.jpg" class="img-responsive top-image">
+{% endif %}
+
+<h1 class="post-title">{{page.title | markdownify | remove: '<p>' | remove: '</p>'}}</h1>
 <div class="post-container">
   <p>
     <strong>{{ page.published | date: '%B %d, %Y' }}</strong> ( last updated : {{ page.date | date: '%B %d, %Y' }} )
