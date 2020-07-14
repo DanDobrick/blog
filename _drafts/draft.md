@@ -1,15 +1,17 @@
 ---
+title: "Draft"
+date: 2020-07-13
+published: 2020-07-13
+comments: true
+categories: draft
+tags: [draft, draft, draft]
 is_post: true
-title: "draft"
-date: 2030-07-11
-published: 2030-07-11
-categories: category
-tags: [test, test2]
-github: "https://github.com/dandobrick/"
 no_image: true
-excerpt: 
+github: https://www.github.com/dandobrick/blog
+excerpt: this is an optional excerpt that has priority over the first paragraph.
 ---
-This is also the excerpt
+
+This is also the excerpt. If you want to have more than the first paragraph use that `<!--more-->` comment below.
 <!--more-->
 
 ## Test Title 1

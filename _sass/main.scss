@@ -41,8 +41,8 @@ body {
 
 .jumbotron {
 	background: #719d7d;
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-top: 30px;
+	padding-bottom: 30px;
 
 	h1 {
 		color: white;
@@ -51,6 +51,12 @@ body {
 		text-align: center;
 		text-transform: uppercase;
 		letter-spacing: 0.2em;
+	}
+
+	.post-site-title {
+		text-align: center;
+		color: white;
+		font-size: 2em;
 	}
 }
 

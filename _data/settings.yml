@@ -5,18 +5,18 @@ menu:
     link: /tags
   - name: About
     link: /about
-  - name: Follow me
-    submenu:
-      - name: GitHub
-        icon: github
-        link: http://github.com/DanDobrick
-        external: true
-      - name: LinkedIn
-        icon: linkedin-square
-        link: http://www.linkedin.com/in/DanDobrick
-        external: true
-      - name: Twitter
-        icon: twitter
-        link: https://twitter.com/DanDobrick
-        external: true
+  # - name: submenu example
+  #   submenu:
+  #     - name: GitHub
+  #       icon: github
+  #       link: http://github.com/DanDobrick
+  #       external: true
+  #     - name: LinkedIn
+  #       icon: linkedin-square
+  #       link: http://www.linkedin.com/in/DanDobrick
+  #       external: true
+  #     - name: Twitter
+  #       icon: twitter
+  #       link: https://twitter.com/DanDobrick
+  #       external: true
     
