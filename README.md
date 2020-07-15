@@ -3,12 +3,19 @@ Blog using jekyll that lives at [the above url](https://www.dandobrick.com/blog)
 
 Theme taken from https://github.com/alainpham/alainpham.github.io, then modified a WHOLE bunch.
 
+### Drafts:
+
+Create a draft using `thor draft:create "tile in quotes"`
+Publish a draft using `thor draft:publish`
+
+For more options use `thor help draft`
+
 # Todo
-- Write cli function that starts a draft for me
-  - `draft -t "t flag for title" -c "c flag for category" -tags [tag1, tag2,]`
 - Add TIL category
 - [Update profile with github actions](https://simonwillison.net/2020/Jul/10/self-updating-profile-readme/)
-- Get a generic image for "no_image" posts
+- Change thor functions to be `thor draft publish` and `thor draft create`
+- Change thor create function to allow for interactive mode (make default if there is no title)
+- Get a generic image for "no_image" posts (maybe?)
 - Once I have a handful of posts:
   - Setup something for categories
   - Add TIL category

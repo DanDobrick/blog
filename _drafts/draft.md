@@ -2,7 +2,6 @@
 title: "Draft"
 date: 2020-07-13
 published: 2020-07-13
-comments: true
 categories: draft
 tags: [draft, draft, draft]
 is_post: true
