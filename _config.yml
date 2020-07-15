@@ -43,7 +43,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
-  - create_draft.thor
+  - draft_scripts.thor
 
 include: ["_pages"]
 permalink: /posts/:title/
