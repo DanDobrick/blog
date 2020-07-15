@@ -42,6 +42,9 @@ plugins:
 exclude:
   - Gemfile
   - Gemfile.lock
+  - README.md
+  - create_draft.thor
+
 include: ["_pages"]
 permalink: /posts/:title/
 excerpt_separator: <!--more-->
