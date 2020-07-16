@@ -14,8 +14,12 @@ For more options see `thor help draft`
 ## Todo
 
 ### Probably
+- `thor draft:publish`
+  - Handle no new drafts (incl. new commit msg)
+- Add proper links to TOC in excerpts on the home page.
 - [Update profile with github actions](https://simonwillison.net/2020/Jul/10/self-updating-profile-readme/)
 - Change thor functions to be `thor draft publish` and `thor draft create`
+- Split up css into different files.
 - Once I have a handful of posts:
   - Setup something for categories
   - Add TIL category
