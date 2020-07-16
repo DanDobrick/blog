@@ -46,7 +46,7 @@ As a note, you might need to edit the title both in the front-matter and in the 
 ## #{titleized_title}
 DRAFT
 
-    file = File.open("./_drafts/#{file_name}", 'w') { |f| f.write(draft) }
+    File.open("./_drafts/#{file_name}", 'w') { |f| f.write(draft) }
     puts "Draft '#{file_name}' created"
   end
 
@@ -77,7 +77,7 @@ DRAFT
     response = STDIN.gets.chomp
 
     if response == 'y'
-      parts =  post_to_move.split('-')
+      parts = post_to_move.split('-')
       parts.shift(3)
       parts.last.gsub!('.md', '')
       new_post_title = titleize(parts.join(' '))
