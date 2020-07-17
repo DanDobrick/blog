@@ -1,6 +1,6 @@
 ---
 title: "TIL - `ActiveRecord.dup` and `constantize`"
-date: 2020-07-16
+date: 2020-07-17
 published: 2020-07-16
 categories: til
 tags: [til, active-record, ruby]
@@ -101,7 +101,7 @@ So instead, if we wanted to retrieve this constant we would could use either [`s
 
 ```ruby
 constant_type_name = 'type_one'
-self.class.const_get("#{constant_type_name}_CONSTANT") # => MyAwesomeService::TYPE_ONE_CONSTANT
+self.class.const_get("#{constant_type_name.upcase}_CONSTANT") # => MyAwesomeService::TYPE_ONE_CONSTANT
 # or
 "MyAwesomeService::#{constant_type_name.upcase}_CONSTANT".constantize # => MyAwesomeService::TYPE_ONE_CONSTANT
 ```
