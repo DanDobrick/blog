@@ -1,10 +1,10 @@
 ---
-title: "TIL - Some stuff about Active Record"
+title: "Some stuff about Active Record"
 date: 2020-07-13
 published: 2020-07-13
 comments: true
 categories: til
-tags: [til, ruby, active-record]
+tags: [ruby, active-record]
 is_post: true
 excerpt: A couple things about active record that I learned this week.
 ---

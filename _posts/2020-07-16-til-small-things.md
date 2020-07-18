@@ -1,9 +1,9 @@
 ---
-title: "TIL - `ActiveRecord.dup` and `constantize`"
+title: "`ActiveRecord.dup` and `constantize`"
 date: 2020-07-17
 published: 2020-07-16
 categories: til
-tags: [til, active-record, ruby]
+tags: [active-record, ruby]
 is_post: true
 no_image: true
 ---
