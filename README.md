@@ -14,11 +14,10 @@ For more options see `thor help draft`
 ## Todo
 
 ### Probably
-- Fix Thor draft:create. Categories should not be an array and there should be a line break before categories
+- Fix Thor draft:create. Categories should not be an array and line breaks are broken
 - `thor draft:publish`
   - Handle no new drafts (incl. new commit msg)
 - Add proper links to TOC in excerpts on the home page.
-- [Update profile with github actions](https://simonwillison.net/2020/Jul/10/self-updating-profile-readme/)
 - Change thor functions to be `thor draft publish` and `thor draft create`
 - Split up css into different files.
 
@@ -26,6 +25,13 @@ For more options see `thor help draft`
 - Get a generic image for "no_image" posts
 - Update thor create function to allow for interactive mode (make default if there is no title)
 - Make thor script executable
+- Rewrite thor script in another language
+  - Rust?
+  - Go?
+  - C?
+  - C++?
+  - Java?
+  - ASM (j/k)
 
 ## License
 The content of this project is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode), and the underlying source code used to format and display that content is licensed under the [MIT license](https://github.com/DanDobrick/blog/blob/master/LICENSE)
