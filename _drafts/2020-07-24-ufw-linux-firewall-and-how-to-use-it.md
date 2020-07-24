@@ -2,13 +2,13 @@
 title: `ufw` - Linux Firewall And How To Use It
 date: 2020-07-24
 published: 2020-07-24
-tags: ["do-learning", "ubuntu", "linux", "firewall", "server", "Heroku", "digital-ocean"]
+tags: ["do-k8s-node", "ubuntu", "linux", "k8s", "server", "Heroku", "digital-ocean"]
 is_post: true
 categories: ["software"]
 ---
 I've been tinkering with digital ocean and thinking about moving a personal project from Heroku to a DO droplet running a small k8s cluster. Both to learn about setting up k8s with a real-life example and because DO is cheaper than Heroku for my use-case.
 
-INSERT `do-learning` tag link and talk about my learning journey.
+INSERT `do-k8s-node` tag link and talk about my learning journey.
 
 Maybe insert a TOC here
 
