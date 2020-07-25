@@ -7,8 +7,10 @@ Theme taken from https://github.com/alainpham/alainpham.github.io, then modified
 Posts I want to write but haven't yet
 
 - Postgres indices and Binary trees
+
+Ongoing series:
 - k8s
-  - [Setting up a single Node k8s cluster on a single Digital Ocean droplet](https://dandobrick.com/blog/tags/#do-k8s-node) (This link wil be dead until I publish the first post in this series)
+  - [Setting up a single Node k8s cluster on a single Digital Ocean droplet](https://dandobrick.com/blog/tags/#do-k8s-node)
 
 ## Drafts:
 
