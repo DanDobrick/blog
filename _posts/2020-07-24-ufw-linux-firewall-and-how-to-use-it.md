@@ -19,7 +19,7 @@ This first post is about the firewall built into Ubuntu: `ufw` as well as why I 
 <!--more-->
 
 ## Ufw - Linux Firewall And How To Use It
-I found [a Digital Ocean tutorial](link) that talked about setting up your droplet and doing a few security tasks, including something I hadn't done in the past: configuring a firewall using `ufw`.
+I found [a Digital Ocean tutorial](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04) that talked about setting up your droplet and doing a few security tasks, including something I hadn't done in the past: configuring a firewall using `ufw`.
 
 The manpage for `ufw` states:
 > This program is for managing a Linux firewall and aims to provide an easy to use interface for the user.
