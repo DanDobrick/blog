@@ -1,11 +1,13 @@
 ---
 title: "`ufw` - Linux Firewall And How To Use It"
-date: 2020-07-24
+date: 2020-08-02
 published: 2020-07-24
 tags: ["do-k8s-node", "ubuntu", "linux", "k8s", "Heroku", "digital-ocean"]
 is_post: true
 categories: ["software"]
 ---
+**08-02-2020: Updated with how I setup [UFW on my home server](#ufw-on-my-personal-server)**
+
 I've been tinkering a bit with Digital Ocean (use my referral link to get [$100 in Digital Ocean credit](https://m.do.co/c/991135433694 "Click for $100 in Digital Ocean credit")) and I've decided to move a small personal project from Heroku to a droplet running a small [Kubernetes](https://kubernetes.io/) (k8s) cluster. I want to do this both to learn about setting up k8s (very useful since I work with it daily) and because Digital Ocean is cheaper than Heroku for my use-case.
 
 This will be the first post in a series about setting up this single-node k8s cluster on a [Digital Ocean](https://m.do.co/c/991135433694) droplet; check out the [`do-k8s-node` tag](/blog/tags/#do-k8s-node) to find the other posts in this series; I'll also be adding links to the next post in the series as I write them.
@@ -13,6 +15,7 @@ This will be the first post in a series about setting up this single-node k8s cl
 This first post is about the firewall built into Ubuntu: `ufw` as well as why I want to move from Heroku to [Digital Ocean](https://m.do.co/c/991135433694).
 
 - [Ufw - Linux Firewall And How To Use It](#ufw---linux-firewall-and-how-to-use-it)
+  - [UFW on my personal server](#ufw-on-my-personal-server)
 - [Heroku vs Digital Ocean prices](#heroku-vs-digital-ocean-prices)
   - [Free Digital Ocean Credit](#free-digital-ocean-credit)
   - [Heroku Costs](#heroku-costs)
@@ -54,6 +57,61 @@ $ ufw allow 1234
 ```
 
 Once I setup the server on this droplet I'll be adding more firewall rules for the various services that I'll be running and I'll be sure to include those commands in the posts where I setup the services.
+
+**UPDATE:**
+
+### UFW on my personal server
+
+I have a personal server that I'm running various services on:
+
+- [pihole](https://pi-hole.net/)
+- Simple home page.
+- [Calibre-Web](https://github.com/janeczku/calibre-web) Front-end for the Calibre ebook organization/hosting.
+- [BookStack](https://www.bookstackapp.com/): Personal wiki.
+- [Plex](https://www.plex.tv/): Media server/player; kinda like a self-hosted Netflix.
+- Piecewise downloading service.
+
+Each of these services is exposed on a specific port, but only some of them are exposed outside my network. For the various things that are exposed outside my network, I need to `ufw allow` those ports to be accessed.
+
+Since I'm using [Caddy](https://caddyserver.com/) to route the traffic to the various pages/services, I have a `caddyfile` that looks something like this (xxx.xxx.xx.xx is the internal ip of my docker containers):
+
+```
+books.some-url.com {
+  tls {
+    dns cloudflare
+  }
+
+  proxy / xxx.xxx.xx.xx:55555 {
+    transparent
+  }
+
+}
+
+deluge.some-url.com {
+  tls {
+    dns cloudflare
+  }
+
+  proxy / xxx.xxx.xx.xx:1337{
+    transparent
+  }
+}
+```
+
+For each of these I simply expose the port using `ufw`:
+
+```bash
+$ sudo ufw allow 1337
+$ sudo ufw allow 5555
+```
+
+For the services that I want to expose to my local network, but nowhere else, I use the `for` syntax of `ufw`:
+
+```bash
+$ sudo ufw allow from 192.168.29.0/24
+```
+
+where `192.168.29.0/24` represents my local network. Now _all_ ports are exposed to my local network allowing my to access _any_ app or service that I run on my local server
 
 ## Heroku vs Digital Ocean prices
 Since I mentioned that I'm migrating from Heroku to [Digital Ocean](https://m.do.co/c/991135433694 "Click for $100 in Digital Ocean credit"), I thought it might be interesting to discuss the _why_ of this decision.
