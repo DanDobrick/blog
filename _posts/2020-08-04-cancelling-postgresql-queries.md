@@ -4,7 +4,6 @@ date: 2020-08-04
 published: 2020-08-04
 tags: ['postgres', 'rails', 'active-record']
 is_post: true
-excerpt: this is an optional excerpt that has priority over the first paragraph.
 ---
 During a recent effort at work to optimize database performance we found a bunch of queries which our Rails application triggered but, since the query took longer than our configured HTTP timeout, the transaction was later abandoned. We had initially thought that [PgBouncer](https://github.com/pgbouncer/pgbouncer) might have a setting to cancel queries after a request times-out, but [that doesn't seem to be a feature](https://github.com/pgbouncer/pgbouncer/issues/63) that PgBouncer Currently supports.
 
