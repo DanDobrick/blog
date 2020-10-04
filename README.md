@@ -28,6 +28,7 @@ For more options see `thor help draft`
   - Handle no new drafts (incl. new commit msg)
 - Change thor functions to be `thor draft publish` and `thor draft create`
 - Split up css into different files.
+- Fix broken css on tags page when there are multiple lines of tags
 
 ### Maybe
 - Get a generic image for "no_image" posts

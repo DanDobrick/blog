@@ -106,11 +106,11 @@ class SerializerClass
 end
 ```
 
-Sso I decided to check if [`Array`](https://ruby-doc.org/core-2.5.1/Array.html) or [`Enumerable`](https://ruby-doc.org/core-2.5.1/Enumerable.html) had methods I could leverage.
+So I decided to check if [`Array`](https://ruby-doc.org/core-2.5.1/Array.html) or [`Enumerable`](https://ruby-doc.org/core-2.5.1/Enumerable.html) had methods I could leverage.
 
 ## My Solution
 
-After reading the docs a bit, I found [partition](https://ruby-doc.org/core-2.5.1/Enumerable.html#method-i-partition) return an array of arrays, the first containing everything that returned `true` and the second array containing everything else:
+After reading the docs a bit, I found [partition](https://ruby-doc.org/core-2.5.1/Enumerable.html#method-i-partition) which returns an array of arrays, the first containing everything that returned `true` and the second array containing everything else:
 
 ```ruby
 [1, 2, 3, 4, 5, 6].partition { |num| num % 2 == 0 }
