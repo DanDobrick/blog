@@ -4,6 +4,7 @@ gem 'therubyracer'
 
 group :development do
   gem 'thor'
+  gem 'pry'
 end
 
 # If you have any plugins, put them here!
