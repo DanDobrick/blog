@@ -10,7 +10,7 @@ Ruby has a neat function in `Enumerable` called [partition](https://ruby-doc.org
 
 ## My problem
 
-I had an array of ActiveRecord models that were being serialized and returned in a specific order:
+I had an array of ActiveRecord models:
 
 ```ruby
 class Section < ActiveRecord::Base
@@ -58,12 +58,20 @@ This might be better illustrated by a simplified example: say we wanted to place
 Unfortunately ruby `delete_if` doesn't return the objects removed, so we need to find them, delete them then put them back on at the end.
 
 ```ruby
-last_fields = fields.find_by { |field| field.section.section_type == 'last' }
+class SerializerClass
+  module_function
 
-# Required because .delete(*[]) returns an ArgumentError:
-if last_fields.count > 0
-  fields = fields.delete(*last_fields)
-  fields = fields.append(*last_fields)
+  def serialize_fields(fields)
+    sorted_fields = special_sort(fields)
+    last_fields = sorted_fields.find_by { |field| field.section.section_type == 'last' }
+
+    # Required because .delete(*[]) returns an ArgumentError:
+    if last_fields.count > 0
+      sorted_fields = sorted_fields.delete(*last_fields)
+      sorted_fields = sorted_fields.append(*last_fields)
+    end
+    sorted_fields
+  end
 end
 ```
 
@@ -73,20 +81,28 @@ A few weeks later I was told we need to add ANOTHER bit of logic putting fields 
 
 This gets gross kinda quickly:
 ```ruby
-last_fields = fields.select { |field| field.section.section_type == 'last' }
-penultimate_fields = fields.select { |field| field.section.section_type == 'penultimate' }
+class SerializerClass
+  module_function
 
-if last_fields.any?
-  fields = fields.delete(*last_fields)
+  def serialize_fields(fields)
+    sorted_fields = special_sort(fields)
+    last_fields = sorted_fields.select { |field| field.section.section_type == 'last' }
+    penultimate_fields = sorted_fields.select { |field| field.section.section_type == 'penultimate' }
 
-  if penultimate_fields.any?
-    fields = fields.delete(*penultimate_fields)
-    # Writing this now I'm realizing I could have done array addition at the end instead of using
-    # append, but I like my partition solution better anyway 
-    fields = fields.append(*penultimate_fields)
+    if last_fields.any?
+      sorted_fields = sorted_fields.delete(*last_fields)
+
+      if penultimate_fields.any?
+        sorted_fields = sorted_fields.delete(*penultimate_fields)
+        # Writing this now I'm realizing I could have done array addition at the end instead of using
+        # append, but I like my partition solution better anyway 
+        sorted_fields = sorted_fields.append(*penultimate_fields)
+      end
+
+      sorted_fields = sorted_fields.append(*last_fields)
+    end
+    sorted_fields
   end
-
-  fields = fields.append(*last_fields)
 end
 ```
 
@@ -113,9 +129,16 @@ p odd
 
 Re-writing the code above with partition we can say:
 ```ruby
-last_fields, other_fields = fields.partition { |field| field.section.section_type == 'last' }
-penultimate_fields, other_fields = fields.partition { |field| field.section.section_type == 'penultimate' }
+class SerializerClass
+  module_function
 
-ordered_fields = other_fields + penultimate_fields + last_fields
+  def serialize_fields(fields)
+    sorted_fields = special_sort(fields)
+    last_fields, other_fields = sorted_fields.partition { |field| field.section.section_type == 'last' }
+    penultimate_fields, other_fields = other_fields.partition { |field| field.section.section_type == 'penultimate' }
+
+    other_fields + penultimate_fields + last_fields
+  end
+end
 ```
-Which feels a lot more straight-forward and gives allows us to have a more declarative ordering statement at the end.
+Which is less destructive, feels a lot more straight-forward and gives allows us to have a more declarative ordering statement at the end.
