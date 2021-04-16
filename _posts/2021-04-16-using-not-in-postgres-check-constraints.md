@@ -5,9 +5,11 @@ published: 2021-04-16
 tags: ["postgres"]
 is_post: true
 ---
+For some reason I could not find good information on this (maybe because it's obvious). But you can add `NOT` into your Postgres `CHECK CONSTRAINT`s.
+<!--more-->
 
 ## Using NOT in Postgres CHECK constraints
-For some reason I could not find good information on this (maybe because it's obvious). But you can simply add a `NOT` into your Postgres `CHECK CONSTRAINTS`. Consider the following scenario: 
+Consider the following scenario:
 
 You have a table that contains pricing data and that data has both a frequency (monthly, daily, etc) and a value in cents. That table may look something like:
 ```sql
