@@ -1,14 +1,14 @@
 ---
-title: Using NOT in Postgres CHECK constraints
+title: Using `NOT` in Postgres `CHECK` constraints
 date: 2021-04-16
 published: 2021-04-16
 tags: ["postgres"]
 is_post: true
 ---
-For some reason I could not find good information on this (maybe because it's obvious). But you can add `NOT` into your Postgres `CHECK CONSTRAINT`s. This is particularly useful when you find a nice succinct way to express the opposite condition of the constraint you want.
+For some reason I could not find good information on this (maybe because it's obvious). But you can add `NOT` into your Postgres `CHECK CONSTRAINT`s; this is particularly useful when you find a nice succinct way to express the negation of the constraint you want.
 <!--more-->
 
-## Using NOT in Postgres CHECK constraints
+
 Consider the following scenario:
 
 You have a table that contains pricing data and that data has both a frequency (monthly, daily, etc) and a value in cents. That table may look something like:

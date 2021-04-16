@@ -8,10 +8,6 @@ Posts I want to write but haven't yet
 
 - Postgres indices and Binary trees
 
-Ongoing series:
-- k8s
-  - [Setting up a single Node k8s cluster on a single Digital Ocean droplet](https://dandobrick.com/blog/tags/#do-k8s-node)
-
 ## Drafts:
 
 Create a draft: `thor draft:create "tile in quotes"`
@@ -40,7 +36,6 @@ For more options see `thor help draft`
   - C?
   - C++?
   - Java?
-  - ASM (j/k)
 
 ## License
 The content of this project is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode), and the underlying source code used to format and display that content is licensed under the [MIT license](https://github.com/DanDobrick/blog/blob/master/LICENSE)

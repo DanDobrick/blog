@@ -57,6 +57,10 @@ body {
 		text-align: center;
 		color: white;
 		font-size: 2em;
+		a {
+			color: inherit;
+			text-decoration: inherit;
+		}
 	}
 }
 
