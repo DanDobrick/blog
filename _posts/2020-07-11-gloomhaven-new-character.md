@@ -6,7 +6,7 @@ categories: boardgames
 tags: [gloomhaven, rules, levelling]
 is_post: true
 ---
-After not playing Gloomhaven for a bit, my wife and I opened up the box to realize that she needed to retire her character and make a new one before we play the scenario. Easy enough we thought, we opened up the rule book to ensure we were doing it the right way and... Lo and behold we had forgotten about things that make a fairly large difference.
+After not playing [Gloomhaven](https://www.amazon.com/gp/product/B01LZXVN4P/ref=as_li_tl?ie=UTF8&tag=dandobrickblo-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01LZXVN4P&linkId=096992d7b494498fb58bcdc7c1ecb7fb) for a bit, my wife and I opened up the box to realize that she needed to retire her character and make a new one before we play the scenario. Easy enough we thought, we opened up the rule book to ensure we were doing it the right way and... Lo and behold we had forgotten about things that make a fairly large difference.
 <!--more-->
 ## 1. Perks
 When you create a new character you get perks equal to the number of characters you have previously retired. This is something we both had forgotten about in the past so it was quite the surprise when we read that portion of the rules.
