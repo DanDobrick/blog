@@ -40,7 +40,7 @@ Unfortunately, if you want to do anything more complex than calling a method on 
 
 ```ruby
 > students.map { |student| "#{student.first_name} #{student.last_name}" }
-=> ["Dan", "Bryce", "Sean"]
+=> ["Dan Dobrick", "Bryce Harper", "Sean Villanueva O'Driscoll"]
 > students.map { |student| SomeService.action(student) }
 => [{:name=>"Dan Dobrick", :location=>"CO"},
  {:name=>"Bryce Harper", :location=>"PA"},
