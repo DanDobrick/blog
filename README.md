@@ -17,6 +17,9 @@ Publish a draft: `thor draft:publish`
 For more options see `thor help draft`
 
 ## Todo
+### Sooner rather than later
+Deal with all these dependency issues
+
 ### Probably
 - Add proper links to TOC in excerpts on the home page.
 - Fix Thor draft:create. Categories should not be an array and line breaks are broken
