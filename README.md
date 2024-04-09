@@ -13,6 +13,8 @@ Publish a draft: `thor draft:publish`
 For more options see `thor help draft`
 
 ## Todo
+- Fix CSS so inline images resize to fit viewport
+
 I haven't done these in years; who knows if I ever actually will
 
 - Add proper links to TOC in excerpts on the home page.

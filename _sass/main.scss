@@ -42,7 +42,7 @@ body {
 .jumbotron {
 	background: #719d7d;
 	padding-top: 30px;
-	padding-bottom: 30px;
+	padding-bottom: 15px;
 
 	h1 {
 		color: white;
@@ -61,6 +61,11 @@ body {
 			color: inherit;
 			text-decoration: inherit;
 		}
+	}
+
+	.top-desc {
+		text-align: center;
+		color: white;
 	}
 }
 
@@ -109,7 +114,7 @@ body {
 	}
 }
 
-// Below this line there's just confusing navbar css that came from Jekyll template
+// Below this line there's navbar css that came from Jekyll template
 .navbar-default {
 	background-color: black;
 	border-color: #12421f;
