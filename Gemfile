@@ -1,7 +1,5 @@
 source "https://rubygems.org"
 
-gem 'therubyracer'
-
 group :development do
   gem 'thor'
   gem 'pry'
