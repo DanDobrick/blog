@@ -4,8 +4,10 @@
 				class="fa fa-inverse fa-github fa-3x"></i></a></li>
 		<li><a href="{{ site.data.social_links.linkedin }}"> <i
 				class="fa fa-inverse fa-linkedin-square fa-3x"></i></a></li>
-		<li><a href="{{ site.data.social_links.twitter }}"> <i
-				class="fa fa-inverse fa-twitter fa-3x"></i></a></li>
 	</ul>
-	<div class='copyright'>© 2020 Daniel Dobrick</div>
+	<div class='copyright'>
+		{% capture currentYear %}
+			{{ site.time | date: '%Y' }}
+		{% endcapture %}
+		© {{currentYear}} Daniel Dobrick</div>
 </footer>
