@@ -30,11 +30,22 @@ body {
 	text-align: center;
 }
 
-.related-posts {
-	padding-bottom: 2em;
+.call-to-action {
+	padding-bottom: 1em;
+
+	p {
+		text-align: center;
+	}
 
 	hr {
-		padding-top: 1em;
+		border: none;
+		border-bottom: 1px solid black;
+	}
+}
+
+.related-posts {
+
+	hr {
 		border: none;
 		border-bottom: 1px solid black;
 	}
