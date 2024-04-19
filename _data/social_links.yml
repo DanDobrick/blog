@@ -1,6 +1,15 @@
-github: 'https://github.com/dandobrick'
-linkedin: 'https://www.linkedin.com/in/dandobrick'
-twitter: 'https://twitter.com/dandobrick'
-website: 'https://www.dandobrick.com'
-kofi: 'https://ko-fi.com/dandobrick'
+# github: 'https://github.com/dandobrick'
+github:
+  url: 'https://github.com/dandobrick'
+  icon: 'fa-github'
+  text: 'DanDobrick'
+linkedin:
+  url: 'https://www.linkedin.com/in/dandobrick'
+  icon: 'fa-linkedin-square'
+  text: '/in/dandobrick'
+website:
+  url: 'https://www.dandobrick.com'
+kofi: 
+  url: 'https://ko-fi.com/dandobrick'
+  text: Buy me a beer!
 email: 'dandobrick@gmail.com'

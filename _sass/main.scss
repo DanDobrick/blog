@@ -20,7 +20,6 @@ body {
 		margin-bottom: 1em;
 	}
 }
-
 .top-image {
 	width: 100%;
 	border: 1px solid black;
@@ -132,6 +131,16 @@ body {
 
 .contact-container {
 	line-height: 2.5;
+
+	h2 {
+		font-size: 1.5em;
+		margin-top: 13px;
+		// font-weight: bold;
+	}
+
+	strong {
+		text-decoration: underline;
+	}
 }
 
 // Below this line there's navbar css that came from Jekyll template
