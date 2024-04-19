@@ -20,7 +20,6 @@ body {
 		margin-bottom: 1em;
 	}
 }
-
 .top-image {
 	width: 100%;
 	border: 1px solid black;
@@ -30,11 +29,21 @@ body {
 	text-align: center;
 }
 
+.call-to-action {
+	p {
+		text-align: center;
+	}
+
+	hr {
+		border: none;
+		border-bottom: 1px solid black;
+	}
+}
+
 .related-posts {
 	padding-bottom: 2em;
 
 	hr {
-		padding-top: 1em;
 		border: none;
 		border-bottom: 1px solid black;
 	}
@@ -117,6 +126,19 @@ body {
 
 	h3 {
 		font-size: 25px;
+	}
+}
+
+.contact-container {
+	line-height: 2.5;
+
+	h2 {
+		font-size: 1.5em;
+		margin-top: 13px;
+	}
+
+	strong {
+		text-decoration: underline;
 	}
 }
 
