@@ -5,6 +5,8 @@ menu:
     link: /tags
   - name: About
     link: /about
+  - name: Contact
+    link: /contact
   # - name: submenu example
   #   submenu:
   #     - name: GitHub

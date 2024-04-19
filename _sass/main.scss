@@ -31,8 +31,6 @@ body {
 }
 
 .call-to-action {
-	padding-bottom: 1em;
-
 	p {
 		text-align: center;
 	}
@@ -44,6 +42,7 @@ body {
 }
 
 .related-posts {
+	padding-bottom: 2em;
 
 	hr {
 		border: none;
@@ -129,6 +128,10 @@ body {
 	h3 {
 		font-size: 25px;
 	}
+}
+
+.contact-container {
+	line-height: 2.5;
 }
 
 // Below this line there's navbar css that came from Jekyll template
