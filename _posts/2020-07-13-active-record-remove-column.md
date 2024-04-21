@@ -20,7 +20,7 @@ For example, when you have classes that look like this:
 ```ruby
 class Person < ActiveRecord::Base; end
 
-class Child < ActiveRecord::Base; end
+class Child < Person; end
 ```
 
 and create a child object
