@@ -12,9 +12,13 @@ Publish a draft: `thor draft:publish`
 
 For more options see `thor help draft`
 
-## Todo
-- Fix CSS so inline images resize to fit viewport
+## Notes for writing posts
+- To add classes to images, use the following syntax:
+`![alt-text](path/to-/image.ext){: .class-name}`
+for example:
+`![Table Locks]({{ site.baseurl }}/assets/images/{{ page.id }}/table-locks.png){: .img-responsive}`
 
+## Todo
 I haven't done these in years; who knows if I ever actually will
 
 - Add proper links to TOC in excerpts on the home page.
