@@ -3,9 +3,9 @@ layout: default
 is_post: true
 ---
 {% if page.no_image %}
-  <!-- TODO: ADD  JUMBOTRON-->
+<!-- TODO: ADD  JUMBOTRON-->
 {% else %}
-  <img alt="{{ page.title }}" src="{{ site.baseurl}}/assets/images/{{page.id}}/top.jpg" class="img-responsive top-image">
+<img alt="{{ page.title }}" src="{{ site.baseurl}}/assets/images/{{page.id}}/top.jpg" class="img-responsive top-image">
 {% endif %}
 
 <h1 class="post-title">{{page.title | markdownify | remove: '<p>' | remove: '</p>'}}</h1>
@@ -14,16 +14,16 @@ is_post: true
     <strong>{{ page.published | date: '%B %d, %Y' }}</strong> ( last updated : {{ page.date | date: '%B %d, %Y' }} )
     <br>
     {% for tag in page.tags %}
-      <a class="label label-default" href="{{ site.baseurl }}/tags/#{{ tag | slugify }}">{{ tag }}</a>
+    <a class="label label-default" href="{{ site.baseurl }}/tags/#{{ tag | slugify }}">{{ tag }}</a>
     {% endfor %}
   </p>
 
   {%if page.github %}
-    <p>
-      <a href="{{ page.github }}" class="btn btn-default">
-        <i class="fa fa-github fa-2x"></i> {{ page.github }}
-      </a>
-    </p>
+  <p>
+    <a href="{{ page.github }}" class="btn btn-default">
+      <i class="fa fa-github fa-2x"></i> {{ page.github }}
+    </a>
+  </p>
   {% endif %}
   <hr />
 
@@ -31,26 +31,29 @@ is_post: true
 
   <div class='related-posts'>
     <hr>
-    <div class="call-to-action">  
+    <div class="call-to-action">
       <p>
-        If you have any comments or corrections for this post, feel free to <a href="/blog/contact" target="_blank">contact me.</a><br />
-        Additionally, if you found this post useful consider <a href="{{ site.data.social_links.kofi.url }}" target="_blank">buying me a beer!</a>
+        If you have any comments or corrections for this post, feel free to <a href="https://github.com/DanDobrick/blog"
+          target="_blank">make a PR</a> or
+        <a href="/blog/contact" target="_blank">contact me.</a><br />
+        Additionally, if you found this post useful consider <a href="{{ site.data.social_links.kofi.url }}"
+          target="_blank">buying me a beer!</a>
       </p>
     </div>
 
     <p><strong>Related posts :</strong></p>
     <ul>
       {% for allpost in site.posts %}
-        {% for tag in page.tags %}
-          {% if allpost.tags contains tag and allpost.id != page.id %}
-            <li>
-              <a href="{{ allpost.url | prepend:site.baseurl }}">
-                {{ allpost.title | markdownify | remove: '<p>' | remove: '</p>'}}
-              </a>
-            </li>
-            {% break %}
-          {% endif %}
-        {% endfor %}
+      {% for tag in page.tags %}
+      {% if allpost.tags contains tag and allpost.id != page.id %}
+      <li>
+        <a href="{{ allpost.url | prepend:site.baseurl }}">
+          {{ allpost.title | markdownify | remove: '<p>' | remove: '</p>'}}
+        </a>
+      </li>
+      {% break %}
+      {% endif %}
+      {% endfor %}
       {% endfor %}
     </ul>
   </div>
