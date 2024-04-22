@@ -14,9 +14,9 @@
 title: Dan's Tech (and more) Blog
 name: Dan's Tech (and more) Blog
 description: 
-  Tech blog to share things that I have learned or find interesting!
+  Very infrequent posts about technology and sometimes boardgames
 baseurl: /blog
-github_username: dandobrick
+github_username: DanDobrick
 
 # Default layouts
 defaults:
@@ -48,6 +48,6 @@ exclude:
 include: ["_pages"]
 permalink: /posts/:title/
 excerpt_separator: <!--more-->
-author: http://www.linkedin.com/in/dandobrick
+author: https://dandobrick.com/
 
 host: 0.0.0.0
