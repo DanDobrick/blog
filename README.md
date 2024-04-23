@@ -19,6 +19,10 @@ for example:
 `![Table Locks]({{ site.baseurl }}/assets/images/{{ page.id }}/table-locks.png){: .img-responsive}`
 
 ## Todo
+- Adjust image sizes or implement some kind of image CDN?
+- Center "top" image
+- allow "top" to be either png or jpg
+
 I haven't done these in years; who knows if I ever actually will
 
 - Add proper links to TOC in excerpts on the home page.
