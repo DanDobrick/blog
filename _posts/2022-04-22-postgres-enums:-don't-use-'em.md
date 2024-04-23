@@ -1,30 +1,13 @@
 ---
 title: "Postgres Enums: Don't Use 'Em"
-date: 2024-04-22
-published: 2024-04-22
+date: 2022-04-22
+published: 2022-04-22
 tags: [postgres, enums, database]
 is_post: true
 
-excerpt: this is an optional excerpt that has priority over the first paragraph.
+excerpt: "While Postgres offers an ENUM type, the general recommendation is NOT to use it, here I discuss why and give an alterative solution that I prefer: creating a new table and referencing foreign keys"
 ---
-TODO:
 
-- write an exerpt
-- fix anchors (maybe sitewide?)
-- Add image
-- finish writing other solutions
-- Possibly move up the final example
-- re-read the whole thing and edit.
-- Add anchor links to the numbered list below.
-- Consdier changing the way quotes look
-
-This paragraph will be used as the excerpt if you don't have an "excerpt" front matter. Also if you don't use the "more" below, the index will take the first paragraph as the excerpt
-
-As a note, you might need to edit the title both in the front-matter and in the header below. This script will capitalize words like "is" and "or"
-<!--more-->
-
-# Postgres Enums: Don't Use 'Em
-Consider removing this heading
 When designing a table with a column that will only select from a limited number of options, you'll want to ensure that the values in your database match whatever options you lay out. For example, we could have a table of subscriptions that have either a `monthly` or `annual` recurrence interval:
 
 ```sql
@@ -35,12 +18,7 @@ CREATE TABLE subscriptions(
 );
 ```
 
-And we have a few options for ensuring the integrity of the data in that column:
-
-1. Postgres Enum Type
-2. Creating a new table with descriptive strings and creating FK relationships
-3. Storing string with a `CHECK` constraint
-4. Storing strings(or integers) with application-level validations
+There are a few options for doing this in postgres, but I'm only going to discuss to here, one I recommend (a new table) and one I do not (using `ENUM`s)
 
 ## Postgres Enum Type
 Postgres gives you a fairly easy to create and use ENUMs:
@@ -86,17 +64,17 @@ get deleted and vacuumed away.
 It's the lack of removing elements from the Enum that makes them a _bad_ candidate for most use-cases; unless you KNOW FOR CERTAIN that you'll never need to _remove_ an element from the enum, I suggest creating a new table and using foreign key relationships to accomplish a similar goal.
 
 ## New Table and Foreign Keys
-Creating a table to store the values and referencing them is a _very_ similar process to creating the enum
+Creating a table to store the values and referencing them is a _very_ similar process to creating the `ENUM`.
 
 ```sql
 CREATE table recurrence_intervals(
   id VARCHAR PRIMARY KEY
-)
+);
 
 CREATE TABLE subscriptions(
   id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
   cost_cents INTEGER CHECK(cost_cents > 0),
-  recurrence_interval VARCHAR
+  recurrence_interval VARCHAR,
   CONSTRAINT fk_recurrence_interval
     FOREIGN KEY(recurrence_interval) 
       REFERENCES recurrence_intervals(id)
@@ -117,65 +95,21 @@ VALUES(100, 'not-enumerated');
 -- DETAIL:  Key (recurrence_interval)=(not-enumerated) is not present in table "recurrence_intervals".
 ```
 
-  Removing old values would require a data migration, then removing that value from the DB
-
-  strong Data integrity
-
-  Using descriptive strings for the PKs allows us to forego any JOINs to see the actual values.
-
-  No need to maintain a bunch of validation logic.
-
-
-## Relying on Application-Level Validations
-Another (less-than-ideal)
-Example
-
-pros
-  Makes it very easy to add new values
-  Removing a value would require a code change + data migration
-  Keeps possible values in-code
-Cons
-  Data integrity is only as good as your application’s validations (i.e. not reliable.)
-
-## CHECK Constraints
-  Adding new values requires dropping the check constraint, then re-adding it
-
-  Removing values requires dropping the check constraint, then re-adding it
-
-  Data integrity UNLESS something weird happens between dropping and re-adding the constraint
-
-
-## When Using an Enum May Make Sense
-If you know FOR SURE that your values will never change, you can create an enum. For example, the last time we changed the months of the year was [almost 500 years ago](https://en.wikipedia.org/wiki/Gregorian_calendar), so you're safe to use enums for the months of the year.
-
-Imagine you needed to store which month it's safe to plant seeds in a specific region
-```sql
-CREATE TYPE MONTH as ENUM('Januaray', 'Feburary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
-
-CREATE TABLE plants(
-  id INTEGER PRIMARY KEY,
-  plant_name VARCHAR UNIQUE NOT NULL,
-  zone_name VARCHAR NOT NULL,
-  month_to_plant MONTH
-);
-```
-
-Then you can re-use the MONTH type in other tables as-needed.
+And while [JOINS are VERY cheap](https://www.brianlikespostgres.com/cost-of-a-join.html), if we use descriptive strings for the primary keys we don't have to do any JOINS to get the data we want.
 
 ```sql
-CREATE TABLE other_table(
-  id INTEGER PRIMARY KEY,
-  event_month MONTH
-)
+SELECT * from subscriptions LIMIT 1
+--                   id                  | cost_cents | recurrence_interval 
+--------------------------------------+------------+---------------------
+ -- 855418d0-ae44-4e44-ba7c-dab24370dc1e |        100 | monthly
 ```
 
-Though in this specific case, I'd prefer to store it as an integer with some check constraint since other parts of our system will likely expect "month" to be an integer and it helps with any future [internationalization](https://en.wikipedia.org/wiki/Internationalization_and_localization) you may do.
+Finally, you can _remove_ a value from the table by ensuring there are no references then simply dropping the value:
 
 ```sql
-CREATE TABLE plants(
-  id INTEGER PRIMARY KEY,
-  plant_name VARCHAR UNIQUE NOT NULL,
-  zone_name VARCHAR NOT NULL,
-  month_to_plant INTEGER CHECK (month_to_plant BETWEEN 1 and 12)
-);
+DELETE FROM recurrence_intervals where id='monthly'
 ```
+While this is TECHINICALLY possible with ENUMs, the quote from Tom Lane above explains why it's a bad idea.
+
+## Conclusion
+And it's for all of these reasons that I recommend using a new table and FK relationships over using the native `ENUM` functionality of Postgres. There are other solutions out there such as storing a string with a `CHECK` constraint or just using in-app validations, but those have the same or _more_ downsides as `ENUM`.
