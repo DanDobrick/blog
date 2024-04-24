@@ -1,9 +1,6 @@
 # https://www.dandobrick.com/blog
 Blog using jekyll that lives at [the above url](https://www.dandobrick.com/blog).
 
-## Upcoming Topics
-All Caught up!
-
 ## Drafts:
 
 Create a draft: `thor draft:create "tile in quotes"`
@@ -19,7 +16,6 @@ for example:
 `![Table Locks]({{ site.baseurl }}/assets/images/{{ page.id }}/table-locks.png){: .img-responsive}`
 
 ## Todo
-- Adjust image sizes or implement some kind of image CDN?
 - Center "top" image
 - allow "top" to be either png or jpg
 
@@ -32,7 +28,6 @@ I haven't done these in years; who knows if I ever actually will
 - Change thor functions to be `thor draft publish` and `thor draft create`
 - Split up css into different files.
 - Fix broken css on tags page when there are multiple lines of tags
-- Get a generic image for "no_image" posts
 - Update thor create function to allow for interactive mode (make default if no args given to script)
 - Make thor script executable
 - Rewrite thor script in another language
