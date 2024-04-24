@@ -14,3 +14,4 @@ kofi:
   text: Buy me a beer!
 contact_form:
   url: 'https://letterbird.co/dandobrick'
+  icon: 'fa-envelope'

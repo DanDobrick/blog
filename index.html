@@ -11,19 +11,20 @@ comments: false
 			<a href="{{ post.url | prepend: site.baseurl}}">
 				<h4 class="list-group-item-heading">{{ post.title | markdownify}}</h4>
 				<h6 class="list-group-item-heading">
-						{{ post.published | date: '%B %d, %Y' }} | (Last Update : {{ post.date | date: '%B %d, %Y' }})
+					{{ post.published | date: '%B %d, %Y' }} | (Last Update : {{ post.date | date: '%B %d, %Y' }})
 				</h6>
 			</a>
 			{% for tag in post.tags %}
 				<a class="label label-default" href="{{ site.baseurl }}/tags/#{{ tag | slugify }}">{{ tag }}</a>
 			{% endfor %}
 			{% if post.no_image %}
-			  <!-- TODO: get a generic image for this -->
+				<img alt="Default post image" src="{{ site.baseurl }}/assets/images/default.jpg" class="img-responsive">
 			{% else %}		
 				<img
-				alt="{{ post.title }}"
-				src="{{ site.baseurl }}/assets/images/{{post.id}}/top.jpg" class="img-responsive">
+					alt="{{ post.title }}"
+					src="{{ site.baseurl }}/assets/images/{{post.id}}/top.jpg" class="img-responsive">
 			{% endif %}
+
 			<p>{{ post.excerpt | markdownify }}</p>
 			<a href="{{ post.url | prepend:site.baseurl}}">Read more...</a>
 		</div>
