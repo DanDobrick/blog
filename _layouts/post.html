@@ -3,7 +3,7 @@ layout: default
 is_post: true
 ---
 {% if page.no_image %}
-<!-- TODO: ADD  JUMBOTRON-->
+<img alt="{{ page.title }}" src="{{ site.baseurl}}/assets/images/default.jpg" class="img-responsive top-image">
 {% else %}
 <img alt="{{ page.title }}" src="{{ site.baseurl}}/assets/images/{{page.id}}/top.jpg" class="img-responsive top-image">
 {% endif %}
