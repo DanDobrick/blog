@@ -18,6 +18,8 @@ for example:
 ## Todo
 - Center "top" image
 - allow "top" to be either png or jpg
+- Look into replacing my thor scripts with [jekyll-compose](https://github.com/jekyll/jekyll-compose)
+- clean up CSS; consider splitting into different files.
 
 I haven't done these in years; who knows if I ever actually will
 
@@ -26,7 +28,6 @@ I haven't done these in years; who knows if I ever actually will
 - `thor draft:publish`
   - Handle no new drafts (incl. new commit msg)
 - Change thor functions to be `thor draft publish` and `thor draft create`
-- Split up css into different files.
 - Fix broken css on tags page when there are multiple lines of tags
 - Update thor create function to allow for interactive mode (make default if no args given to script)
 - Make thor script executable
