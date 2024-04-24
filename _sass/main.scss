@@ -28,6 +28,11 @@ body {
 	}
 }
 
+hr {
+	border: none;
+	border-bottom: 1px solid black;
+}
+
 .top-image {
 	width: 100%;
 	border: 1px solid black;
@@ -41,20 +46,10 @@ body {
 	p {
 		text-align: center;
 	}
-
-	hr {
-		border: none;
-		border-bottom: 1px solid black;
-	}
 }
 
 .related-posts {
 	padding-bottom: 2em;
-
-	hr {
-		border: none;
-		border-bottom: 1px solid black;
-	}
 }
 
 .jumbotron {
@@ -63,7 +58,7 @@ body {
 	padding-bottom: 15px;
 	margin: auto;
 	margin-bottom: 3em;
-	width: 75%;
+	width: 65%;
 	border-radius: 4px;
 
 	h1 {
@@ -93,7 +88,8 @@ body {
 }
 
 .container {
-	width: 75%;
+	width: 65%;
+	margin: auto;
 	font-size: 1.3em;
 }
 

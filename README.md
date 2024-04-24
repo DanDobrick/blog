@@ -22,6 +22,7 @@ for example:
 - Adjust image sizes or implement some kind of image CDN?
 - Center "top" image
 - allow "top" to be either png or jpg
+- Look into replacing my thor scripts with [jekyll-compose](https://github.com/jekyll/jekyll-compose)
 
 I haven't done these in years; who knows if I ever actually will
 
