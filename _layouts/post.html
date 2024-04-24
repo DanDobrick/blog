@@ -30,17 +30,7 @@ is_post: true
   {{ content | markdownify}}
 
   <div class='related-posts'>
-    <hr>
-    <div class="call-to-action">
-      <p>
-        If you have any comments or corrections for this post, feel free to <a href="https://github.com/DanDobrick/blog"
-          target="_blank" ref="nofollow noopener">make a PR</a> or
-        <a href="{{site.data.social_links.contact_form.url}}" target="_blank" ref="nofollow noopener">contact
-          me.</a><br />
-        Additionally, if you found this post useful consider <a href="{{ site.data.social_links.kofi.url }}"
-          target="_blank" ref="nofollow noopener">buying me a beer!</a>
-      </p>
-    </div>
+    {% include contact_and_donate.html %}
 
     <p><strong>Related posts :</strong></p>
     <ul>

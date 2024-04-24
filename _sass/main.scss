@@ -26,11 +26,11 @@ body {
 		margin: 1.5em 10px;
 		padding: 0.5em 10px;
 	}
-}
 
-hr {
-	border: none;
-	border-bottom: 1px solid black;
+	hr {
+		border: none;
+		border-bottom: 1px solid black;
+	}	
 }
 
 .top-image {
@@ -143,6 +143,13 @@ hr {
 
 	strong {
 		text-decoration: underline;
+	}
+}
+
+.links-container {
+	h2 {
+		font-size: 2em;
+		margin-top: 13px;
 	}
 }
 

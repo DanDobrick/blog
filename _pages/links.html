@@ -4,14 +4,21 @@ permalink: /links/
 ---
 <div class="links-container">
   <!-- TODO: style this paragraph so it doesn't span the whole page. -->
+  <!-- TODO: style the h2s, they're too big -->
+  <h2>Why a Links Page?</h2>
   <p>
-    I really like the idea of small websites/personal blogs, and I think that the web would be a better place if there were more of them.
-    One good way of ensuring that <i>more</i> people see these small sites is to create links between them,
-    so here are some links that I found intersesting and I hope you enjoy them! I've included a link to the blog and an article or two that I enjoyed.
+    I really like the idea of small websites/personal blogs, and I think that the web would be a better place if there were more sites like that.
+    One good way of ensuring that <i>more</i> people see these small sites is to create links between them; to quote
+    <a href="https://matthiasott.com/articles/into-the-personal-website-verse" target="_blank" ref="nofollow noopener">a blogpost about the small web</a>:
+    <blockquote>
+      Whenever you stumble upon an interesting thought on another site, write about it and link to it. Not only is it respectful to link to the person you quoted, but hyperlinks are also the magic force holding the Web together. 
+    </blockquote>
+
+    So here are some links that I found interesting and I hope you enjoy them! I've included a link to the blog and an article or two that I enjoyed.
   </p>
   <p>
-    <strong>Disclaimer:</strong> I enjoyed the article linked and encourage you to explore these sites, but I did not vet them beyond reading an article or two and cannot guarantee their content.
-    Don't take my linking to them as an endorsement of their entire site and/or the views espoused therein.
+    <strong>Disclaimer:</strong> I enjoyed the linked articles and encourage you to explore these sites, but I cannot guarantee their content.
+    Please don't take my linking to them as an endorsement of their entire site and/or the views espoused therein.
   </p>
 
   <h2>{{page.title}}</h2>
@@ -25,16 +32,5 @@ permalink: /links/
     <li><a href="https://theforest.link/" target="_blank" ref="nofollow noopener">https://theforest.link/</a> - click a button and be redirected to a random small site or blog.</li>
   </ul>
 
-  <!-- TODO: refactor this to an includes on this + post pages. -->
-  <hr>
-  <div class="call-to-action">
-    <p>
-      If you have any comments or corrections for this post, feel free to <a href="https://github.com/DanDobrick/blog"
-        target="_blank" ref="nofollow noopener">make a PR</a> or
-      <a href="{{site.data.social_links.contact_form.url}}" target="_blank" ref="nofollow noopener">contact
-        me.</a><br />
-      Additionally, if you found this post useful consider <a href="{{ site.data.social_links.kofi.url }}"
-        target="_blank" ref="nofollow noopener">buying me a beer!</a>
-    </p>
-  </div>
+  {% include contact_and_donate.html %}
 </div>
