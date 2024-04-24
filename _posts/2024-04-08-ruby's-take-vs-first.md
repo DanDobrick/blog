@@ -43,7 +43,7 @@ SELECT  "users".* FROM "users" WHERE "users"."last_name" = 'Dobrick' LIMIT 1
 This means our datbase can stop once it finds a single record and return it to us, rather than spend extra time and cycles ordering a bunch of records we don't care about.
 
 I'm going to show the header image for this post once more to show how big of an impact a single change had on a production API call; you can see the exact deploy where this change was made reducing the average latency from ~200ms to ~0.02ms.
-![Latency Graph]({{ site.baseurl }}/assets/images/{{ page.id }}/new-relic.png){: .img-responsive}
+![Latency Graph]({{ site.baseurl }}/assets/images/{{ page.id }}/new-relic.jpg){: .img-responsive}
 
 ## Other Options
 As the answer on StackOverflow mentioned, you can use something like `find_by` to achieve the same result
