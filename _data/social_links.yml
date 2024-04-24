@@ -12,4 +12,5 @@ website:
 kofi: 
   url: 'https://ko-fi.com/dandobrick'
   text: Buy me a beer!
-email: 'dandobrick@gmail.com'
+contact_form:
+  url: 'https://letterbird.co/dandobrick'
