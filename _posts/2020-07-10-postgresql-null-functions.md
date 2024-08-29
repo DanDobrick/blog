@@ -45,15 +45,18 @@ ALTER TABLE my_example_table
     CHECK (num_nonnulls(bool_response, int_response, text_response) = 1);
 ```
 
-Finally I paired this with an app-level validation (this project is using rails + ActiveRecord):
+Finally I paired this with an app-level validation (this project is using Rails aActiveRecord):
 
 ```ruby
 class MyResponseClass < ActiveRecord::Base
-    validate :only_one_response
-    # ...
-    private def only_one_response
-        non_null_responses=[bool_response, int_response, text_response].compact if non_null_responses.count !=1
-        errors.add(:base, "Must only have a single response" )
+  validate :only_one_response
+  # ...
+  def only_one_response
+    if non_null_responses.count != 1
+      non_null_responses = [bool_response, int_response, text_response].compact 
     end
+
+    errors.add(:base, "Must only have a single response" )
+  end
 end
 ```
