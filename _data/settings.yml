@@ -1,12 +1,12 @@
 menu: 
-  - name: Posts
+  - name: Tech
     link: /
-  - name: Tags
-    link: /tags
   - name: About
     link: /about
   - name: Links
     link: /links
+  - name: Unexplored Games
+    link: /unexplored-games
   # - name: Contact
   #   link: /contact
   # - name: submenu example

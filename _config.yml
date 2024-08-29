@@ -13,8 +13,7 @@
 
 title: Dan's Tech (and more) Blog
 name: Dan's Tech (and more) Blog
-description: 
-  Very infrequent posts about technology and sometimes boardgames
+description: Very infrequent posts about technology
 baseurl: /blog
 github_username: DanDobrick
 
@@ -49,5 +48,10 @@ include: ["_pages"]
 permalink: /posts/:title/
 excerpt_separator: <!--more-->
 author: https://dandobrick.com/
+collections:
+  unexplored_games:
+    output: true
+    permalink: /:collection/:path/
+
 
 host: 0.0.0.0

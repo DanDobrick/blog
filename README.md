@@ -1,6 +1,10 @@
 # https://www.dandobrick.com/blog
 Blog using jekyll that lives at [the above url](https://www.dandobrick.com/blog).
 
+
+## Unexplored Games
+- Do pagination if I ever get more posts
+
 ## Drafts:
 
 Create a draft: `thor draft:create "tile in quotes"`

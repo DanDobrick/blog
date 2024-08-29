@@ -49,12 +49,23 @@
 	</nav>
 
 	<div class="jumbotron clearfix">
-		{% if page.is_post %}
-			<div class="post-site-title"><a href="/blog/">{{ site.title }}</a></div>
+		{% if page.collection == "unexplored_games" }
+			{% assign site_title = "Unexplored Games" %}
+			{% assign site_title = "Unexplored Games" %}
+			{% assign description = "Discussions of lesser-known and unique board games" %}
+			{% assign home_url = {{site.baseurl}}"/unexplored_games" %}
 		{% else %}
-			<h1 class="text-center">{{ site.title }}</h1>
+		  {% assign site_title = site.title %}
+			{% assign description = site.description %}
+			{% assign home_url = site.baseurl %}
+		{% endif %}
+
+		{% if page.is_post %}
+			<div class="post-site-title"><a href={{home_url}}>{{ site_title }}</a></div>
+		{% else %}
+			<h1 class="text-center">{{ site_title }}</h1>
 			<div>
-				<p class="top-desc">Very infrequent posts about technology</p>
+				<p class="top-desc">{{ description }}</p>
 			</div>
 		{% endif %}
 	</div>
