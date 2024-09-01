@@ -8,7 +8,7 @@ layout: post
 excerpt: Diving into a vintage gem published by Avalon Hill in 1981; **Amoeba Wars** is a <u>light-weight, low-overhead hex-and-counter war game</u>, which is perfect to set up and play in a couple of hours, giving the satisfaction of a more substantial game without the heavy commitment.
 ---
 
-Welcome to the first text version of the [Unexplored Games youtube channel](https://www.youtube.com/@unexploredgames6028), your go-to for lesser-known and unique board games! Today we’re diving into **Amoeba Wars**, a vintage gem published by Avalon Hill in 1981. While this game is obviously out of print, I stumbled upon a site that specializes in old games, including this one:
+Welcome to the first text version of the [Unexplored Games youtube channel](https://www.youtube.com/@unexploredgames6028), your go-to for lesser-known and unique board games! Today we’re diving into **Amoeba Wars**, a vintage gem published by Avalon Hill in 1981; you can find my [video about it here](https://www.youtube.com/watch?v=Q_lUG9JwAkU). While this game is obviously out of print, I stumbled upon a site that specializes in old games, including this one:
 
 
 Purchasing using [this link helps support my videos and this blog](https://www.nobleknight.com/P/11664/Amoeba-Wars?awid=1482)
