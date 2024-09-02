@@ -28,24 +28,27 @@ is_post: true
   <hr />
 
   {{ content | markdownify}}
-
   <div class='related-posts'>
-    {% include contact_and_donate.html %}
+    {% if page.collection == "unexplored_games" %}
+      <hr>
+    {% else %}
+      {% include contact_and_donate.html %}
 
-    <p><strong>Related posts :</strong></p>
-    <ul>
-      {% for allpost in site.posts %}
-      {% for tag in page.tags %}
-      {% if allpost.tags contains tag and allpost.id != page.id %}
-      <li>
-        <a href="{{ allpost.url | prepend:site.baseurl }}">
-          {{ allpost.title | markdownify | remove: '<p>' | remove: '</p>'}}
-        </a>
-      </li>
-      {% break %}
-      {% endif %}
-      {% endfor %}
-      {% endfor %}
-    </ul>
+      <p><strong>Related posts :</strong></p>
+      <ul>
+        {% for allpost in site.posts %}
+        {% for tag in page.tags %}
+        {% if allpost.tags contains tag and allpost.id != page.id %}
+        <li>
+          <a href="{{ allpost.url | prepend:site.baseurl }}">
+            {{ allpost.title | markdownify | remove: '<p>' | remove: '</p>'}}
+          </a>
+        </li>
+        {% break %}
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+      </ul>
+    {% endif %}
   </div>
 </div>
