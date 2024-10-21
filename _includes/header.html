@@ -40,7 +40,11 @@
 								</ul>
 							</li>
 						{% else %}
-							<li><a href="{{item.link | prepend:site.baseurl}}">{{item.name}}</a></li>
+							{% if item[0] == "/" %}
+								<li><a href="{{item.link | prepend:site.baseurl}}">{{item.name}}</a></li>
+							{% else %}
+							<li><a href="{{item.link}}">{{item.name}}</a></li>
+							{% endif %}
 						{% endif %}
 					{% endfor %}
 				</ul>

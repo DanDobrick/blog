@@ -30,7 +30,6 @@ is_post: true
   {{ content | markdownify}}
   <div class='related-posts'>
     {% if page.collection == "unexplored_games" %}
-      <hr>
     {% else %}
       {% include contact_and_donate.html %}
 

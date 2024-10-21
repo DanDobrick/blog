@@ -4,27 +4,6 @@ description: Discussions of lesser-known and unique board games
 comments: false 
 permalink: /unexplored-games/index.html
 collection: unexplored_games
-layout: default
 ---
-<div class="list-group">
-	{% for post in site.unexplored_games %} 
-		<div class="list-group-item">
-			<a href="{{ post.url | prepend: site.baseurl}}">
-				<h4 class="list-group-item-heading">{{ post.title | markdownify}}</h4>
-				<h6 class="list-group-item-heading">
-					{{ post.published | date: '%B %d, %Y' }} | (Last Update : {{ post.date | date: '%B %d, %Y' }})
-				</h6>
-			</a>
-			{% if post.no_image %}
-				<img alt="Default post image" src="{{ site.baseurl }}/assets/images/default.jpg" class="img-responsive">
-			{% else %}		
-				<img
-					alt="{{ post.title }}"
-					src="{{ site.baseurl }}/assets/images/{{post.id}}/top.jpg" class="img-responsive">
-			{% endif %}
-
-			<p>{{ post.excerpt | markdownify }}</p>
-			<a href="{{ post.url | prepend:site.baseurl}}">Read more...</a>
-		</div>
-	{% endfor %}
-</div>
+<meta http-equiv="refresh" content="0; url=https://unexplored-games.com/blogs/game-reviews">
+<link rel="canonical" href="https://unexplored-games.com/blogs/game-reviews" />
