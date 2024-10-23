@@ -1,10 +1,10 @@
 menu: 
   - name: Tech
-    link: /
+    link: /blog/
   - name: About
-    link: /about
+    link: /blog/about
   - name: Links
-    link: /links
+    link: /blog/links
   - name: Unexplored Games
     link: https://www.unexplored-games.com/
   # - name: Contact

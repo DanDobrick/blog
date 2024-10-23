@@ -9,6 +9,9 @@ linkedin:
   text: '/in/dandobrick'
 website:
   url: 'https://www.dandobrick.com'
+unexplored-games:
+  url: 'https://www.unexplored.games'
+  text: Unexplored Games
 kofi: 
   url: 'https://ko-fi.com/dandobrick'
   text: Buy me a beer!
