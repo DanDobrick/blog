@@ -1,7 +1,6 @@
 # https://www.dandobrick.com/blog
 Blog using jekyll that lives at [the above url](https://www.dandobrick.com/blog).
 
-
 ## Unexplored Games
 - Do pagination if I ever get more posts
 
@@ -20,6 +19,8 @@ for example:
 `![Table Locks]({{ site.baseurl }}/assets/images/{{ page.id }}/table-locks.png){: .img-responsive}`
 
 ## Todo
+- Make a page with an embedded video for each unexplored games video.
+
 - Center "top" image
 - allow "top" to be either png or jpg
 - Look into replacing my thor scripts with [jekyll-compose](https://github.com/jekyll/jekyll-compose)
