@@ -21,7 +21,7 @@ CREATE TABLE subscriptions(
 There are a few options for doing this in postgres, but I'm only going to discuss to here, one I recommend (a new table) and one I do not (using `ENUM`s)
 
 ## Postgres Enum Type
-Postgres gives you a fairly easy to create and use ENUMs:
+Postgres gives you fairly easy to create and access ENUMs:
 
 ```sql
 CREATE TYPE INTERVAL_OPTIONS as ENUM ('monthly', 'annual');
