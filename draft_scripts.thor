@@ -10,6 +10,51 @@ class Draft < Thor
     def titleize(string)
       string.gsub(/\b(?<!\w['â`])[a-z]/) { |match| match.capitalize }
     end
+
+    # Date the photo was taken (EXIF), falling back to the file's mtime.
+    def photo_taken_date(path)
+      exif = `sips -g creation "#{path}" 2>/dev/null`[/creation: (\d{4}):(\d\d):(\d\d)/]
+      return ::Date.new($1.to_i, $2.to_i, $3.to_i) if exif
+      File.mtime(path).to_date
+    rescue StandardError
+      ::Date.today
+    end
+
+    # "Sept 26, 2026"
+    def pretty_date(date)
+      month = date.strftime('%b').sub('Sep', 'Sept')
+      "#{month} #{date.day}, #{date.year}"
+    end
+
+    # Suggests titles from the on-device image classifier (scripts/classify.swift),
+    # always offering the photo's date as the fallback. Returns the chosen title.
+    def choose_photo_title(source)
+      date_title = pretty_date(photo_taken_date(source))
+      return date_title unless $stdin.tty?
+
+      puts 'Looking at the photo to suggest titles (first run takes a few seconds)...'
+      script = File.expand_path('scripts/classify.swift', __dir__)
+      labels = `swift #{script} "#{source}" 3 2>/dev/null </dev/null`.split("\n").map(&:strip).reject(&:empty?)
+
+      choices = labels + [date_title]
+      puts 'Pick a title:'
+      choices.each_with_index { |c, i| puts "  #{i + 1}. #{c}" }
+      puts "  or type your own. [Enter = #{choices.size}, #{date_title}]"
+      print '> '
+      answer = $stdin.gets.to_s.strip
+
+      if answer.empty?
+        date_title
+      elsif answer =~ /\A\d+\z/ && (1..choices.size).cover?(answer.to_i)
+        choices[answer.to_i - 1]
+      else
+        answer
+      end
+    end
+
+    def slugify(title)
+      title.downcase.gsub(/[^a-z0-9]+/, '-').gsub(/\A-+|-+\z/, '')
+    end
   end
 
   desc 'create TITLE', 'Creates a new draft in the drafts folder'
@@ -50,20 +95,38 @@ DRAFT
     puts "Draft '#{file_name}' created"
   end
 
-  desc 'photo TITLE PHOTO_PATH', 'Creates a photo-only draft from an image file (converted to JPEG, resized, saved as top.jpg plus a square thumb.jpg)'
+  desc 'photo [TITLE] PHOTO_PATH', 'Creates a photo-only draft from an image file (converted to JPEG, resized, saved as top.jpg plus a square thumb.jpg). Without TITLE, suggests titles from the photo.'
   method_option :tags, aliases: '-t', desc: 'Adds tags', type: :array, default: ['photo']
   method_option :max_width, aliases: '-w', desc: 'Max width/height in pixels for the longest side', type: :numeric, default: 2000
   method_option :focus, aliases: '-f', desc: 'Vertical focus of the home page banner crop, 0 (top) to 100 (bottom). Default: auto-detected', type: :numeric
   method_option :quality, aliases: '-q', desc: 'JPEG quality (1-100)', type: :numeric, default: 85
-  def photo(title, photo_path)
+  def photo(*args)
+    abort 'Usage: thor draft:photo [TITLE] PHOTO_PATH' unless [1, 2].include?(args.size)
+    photo_path = args.last
+    title = args.size == 2 ? args.first : nil
+
     source = File.expand_path(photo_path)
     abort "Photo not found: #{source}" unless File.file?(source)
     abort "This command needs macOS's `sips` tool." unless system('which sips > /dev/null 2>&1')
 
     today = ::Date.today
-    slug = title.downcase.gsub(' ', '-')
+    auto_title = title.nil?
+    title = choose_photo_title(source) if auto_title
+    titleized_title = auto_title ? title : titleize(title)
+
+    slug = slugify(title)
+    abort "Couldn't make a file name from the title #{title.inspect}." if slug.empty?
+    if auto_title
+      # Two photos with the same title (e.g. same day) would collide; number them.
+      base = slug
+      n = 1
+      while File.exist?("./assets/images/posts/#{slug}/top.jpg")
+        n += 1
+        slug = "#{base}-#{n}"
+        titleized_title = "#{title} #{n}"
+      end
+    end
     file_name = "#{today}-#{slug}.md"
-    titleized_title = titleize(title)
     dir = "./assets/images/posts/#{slug}"
     dest = "#{dir}/top.jpg"
     abort "#{dest} already exists; pick a different title." if File.exist?(dest)
@@ -97,7 +160,7 @@ DRAFT
 
     draft = <<-DRAFT
 ---
-title: #{titleized_title}
+title: #{titleized_title.inspect}
 date: #{today}
 published: #{today}
 tags: #{options[:tags]}

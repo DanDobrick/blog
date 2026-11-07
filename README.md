@@ -20,6 +20,14 @@ A photo post is a post that is just a picture (with an optional one-line caption
 bundle exec thor draft:photo "Title in quotes" path/to/photo.heic
 ```
 
+or leave the title off and let it suggest some:
+
+```
+bundle exec thor draft:photo path/to/photo.heic
+```
+
+It looks at the photo (`scripts/classify.swift`, Apple's on-device Vision classifier, no network) and offers up to 3 short titles like "Lake" or "Pumpkin", plus the date the photo was taken ("Sept 26, 2026"). Type a number, type your own title, or just press Enter for the date. Two photos with the same title get a number appended.
+
 This will:
 - convert the photo to a JPEG (HEIC, PNG, etc. are fine) and shrink it so the longest side is at most 2000px (smaller photos are not enlarged)
 - save it as `assets/images/posts/<title-slug>/top.jpg`, plus a 600px center-cropped square `thumb.jpg` used on the home page and the `/photos/` grid
