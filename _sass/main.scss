@@ -95,8 +95,10 @@ body {
 
 .photo-zoom {
 	display: block;
+	position: relative;
 	cursor: zoom-in;
 }
+
 
 .photo-lightbox {
 	position: fixed;
@@ -152,11 +154,29 @@ body {
 
 // Photo posts in the home page feed: a wide banner strip of the photo, like
 // the top images on regular posts. `object-position` comes from photo_focus.
+.photo-feed-frame {
+	overflow: hidden;
+	border-radius: 4px;
+	margin-bottom: 0.5em;
+}
+
 .photo-feed-image {
 	width: 100%;
-	aspect-ratio: 5 / 1;
+	// width / height. Lower = taller. Existing post banners range ~2.8 to ~6.8.
+	// Keep `bannerRatio` in scripts/focus.swift in sync with this.
+	aspect-ratio: 4 / 1;
 	object-fit: cover;
 	border-radius: 4px;
+}
+
+// Hovering anywhere on the card nudges the photo, hinting that it's clickable.
+.photo-feed-image {
+	transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.list-group-item:hover .photo-feed-image {
+	transform: scale(1.03);
+	filter: brightness(1.07);
 }
 
 // /photos/ page: grid of square thumbnails.
@@ -167,12 +187,24 @@ body {
 	padding-bottom: 1em;
 }
 
+.photo-grid-item {
+	display: block;
+	overflow: hidden;
+	border-radius: 4px;
+}
+
 .photo-grid-item img {
 	display: block;
 	width: 100%;
 	aspect-ratio: 1 / 1;
 	object-fit: cover;
-	border-radius: 4px;
+	transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+// Same hover cue as the home page photo cards.
+.photo-grid-item:hover img {
+	transform: scale(1.03);
+	filter: brightness(1.07);
 }
 
 .not-found-text {

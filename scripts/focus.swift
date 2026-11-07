@@ -103,13 +103,14 @@ func focusPercent(bannerFraction: Float) -> Int {
     return bestBand(rows: rows, targetRows: Int((bannerFraction * 0.25 * Float(h)).rounded()))
 }
 
-// Banner strip is 5:1 (matches .photo-feed-image in _sass/main.scss).
-var bannerFraction: Float = 0.27
+// Banner strip width/height ratio. Keep in sync with .photo-feed-image in _sass/main.scss.
+let bannerRatio = 4.0
+var bannerFraction: Float = Float(1 / bannerRatio)
 if let src = CGImageSourceCreateWithURL(url as CFURL, nil),
    let props = CGImageSourceCopyPropertiesAtIndex(src, 0, nil) as? [CFString: Any],
    let pw = props[kCGImagePropertyPixelWidth] as? Double,
    let ph = props[kCGImagePropertyPixelHeight] as? Double, ph > 0 {
-    bannerFraction = Float(min(1, (pw / 5) / ph))
+    bannerFraction = Float(min(1, (pw / bannerRatio) / ph))
 }
 
 print(min(max(focusPercent(bannerFraction: bannerFraction), 0), 100))

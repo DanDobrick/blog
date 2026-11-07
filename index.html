@@ -18,10 +18,12 @@ comments: false
 				<a class="label label-default" href="{{ site.baseurl }}/tags/#{{ tag | slugify }}">{{ tag }}</a>
 			{% endfor %}
 			{% if post.photo %}
-				<img
-					alt="{{ post.title | strip_html }}"
-					src="{{ site.baseurl }}/assets/images/{{post.id}}/top.jpg" class="img-responsive photo-feed-image"
-					style="object-position: 50% {{ post.photo_focus | default: '50%' }};">
+				<div class="photo-feed-frame">
+					<img
+						alt="{{ post.title | strip_html }}"
+						src="{{ site.baseurl }}/assets/images/{{post.id}}/top.jpg" class="img-responsive photo-feed-image"
+						style="object-position: 50% {{ post.photo_focus | default: '50%' }};">
+				</div>
 			{% elsif post.no_image %}
 				<img alt="Default post image" src="{{ site.baseurl }}/assets/images/default.jpg" class="img-responsive">
 			{% else %}		
