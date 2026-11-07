@@ -454,3 +454,118 @@ navbar-brand:hover,
 		background-color: #12421f;
 	}
 }
+// ---- Mobile / narrow screens ----
+@media (max-width: 767px) {
+	body {
+		padding-top: 4em;
+		margin-bottom: 9em;
+	}
+
+	// 65% wide columns are far too narrow on a phone.
+	.container,
+	.jumbotron {
+		width: 94%;
+	}
+
+	.container {
+		font-size: 1.1em;
+		padding-left: 0.9em;
+		padding-right: 0.9em;
+	}
+
+	.jumbotron {
+		padding: 18px 1em 8px;
+		margin-top: 0.75em;
+		margin-bottom: 1.5em;
+
+		h1 {
+			font-size: 1.8em;
+			letter-spacing: 0.1em;
+		}
+
+		.post-site-title {
+			font-size: 1.5em;
+		}
+	}
+
+	#bootstrap-overrides .post-title {
+		font-size: 2em;
+	}
+
+	#bootstrap-overrides .post-title.photo-title {
+		font-size: 1.9em;
+	}
+
+	.post-container h2 {
+		font-size: 1.7em;
+	}
+
+	// Wide code blocks and images scroll/shrink instead of pushing the page sideways.
+	pre {
+		overflow-x: auto;
+	}
+
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.photo-feed-image,
+	.photo-grid-item img,
+	.photo-nav-side img {
+		height: auto;
+	}
+
+	.photo-grid {
+		grid-template-columns: repeat(auto-fill, minmax(7em, 1fr));
+	}
+
+	.photo-nav {
+		font-size: 0.75em;
+	}
+
+	// No hamburger menu (it needs JavaScript): the few nav links sit in one row
+	// next to the logo instead.
+	.navbar-header {
+		float: left;
+	}
+
+	.navbar-default .navbar-collapse {
+		display: block;
+		padding: 0;
+		margin: 0;
+		border: 0;
+		box-shadow: none;
+		overflow: visible;
+	}
+
+	.navbar-nav {
+		float: left;
+		margin: 0;
+	}
+
+	.navbar-nav > li {
+		float: left;
+	}
+
+	.navbar-nav > li > a {
+		padding: 15px 10px;
+	}
+
+	// Footer: stack the icons and the copyright instead of floating them.
+	.footer {
+		height: auto;
+		min-height: 8em;
+		padding-bottom: 1em;
+		text-align: center;
+	}
+
+	.footer-links {
+		float: none;
+		text-align: center;
+	}
+
+	.footer-links li {
+		padding: 0 0.5em;
+	}
+}
