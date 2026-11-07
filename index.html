@@ -8,7 +8,7 @@ comments: false
 <div class="list-group">
 	{% for post in paginator.posts %}
 		<div class="list-group-item">
-			<a href="{{ post.url | prepend: site.baseurl}}">
+			<a class="stretched-link" href="{{ post.url | prepend: site.baseurl}}">
 				<h4 class="list-group-item-heading">{{ post.title | markdownify}}</h4>
 				<h6 class="list-group-item-heading">
 					{{ post.published | date: '%B %d, %Y' }} | (Last Update : {{ post.date | date: '%B %d, %Y' }})

@@ -18,6 +18,28 @@ body {
 
 	.list-group-item {
 		margin-bottom: 1em;
+		position: relative;
+
+		// Make the whole card clickable via the title link;
+		// other links (tags, links in the excerpt) stay above it.
+		.stretched-link::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: 1;
+		}
+
+		a:not(.stretched-link) {
+			position: relative;
+			z-index: 2;
+		}
+
+		&:hover {
+			background-color: #f7f7f7;
+		}
 	}
 
 	blockquote {
