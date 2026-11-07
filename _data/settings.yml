@@ -5,8 +5,8 @@ menu:
     link: /blog/about
   - name: Links
     link: /blog/links
-  - name: Unexplored Games
-    link: https://www.unexplored-games.com/
+  # - name: Unexplored Games
+  #   link: https://www.unexplored-games.com/
   # - name: Contact
   #   link: /contact
   # - name: submenu example

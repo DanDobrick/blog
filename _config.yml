@@ -48,10 +48,10 @@ include: ["_pages"]
 permalink: /posts/:title/
 excerpt_separator: <!--more-->
 author: https://dandobrick.com/
-collections:
-  unexplored_games:
-    output: true
-    permalink: /:collection/:path/
+# collections:
+#   unexplored_games:
+#     output: true
+#     permalink: /:collection/:path/
 
 
 host: 0.0.0.0
