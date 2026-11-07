@@ -14,7 +14,9 @@
 			<div id="navbar-collapse-menu" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 
+					{% assign photo_posts = site.posts | where: "photo", true %}
 					{% for item in site.data.settings.menu %}
+					{% if item.requires == "photos" and photo_posts.size == 0 %}{% continue %}{% endif %}
 						<!-- If has submenus -->
 						{% if item.submenu %}
 						<li class="dropdown">

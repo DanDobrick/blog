@@ -7,6 +7,7 @@ menu:
     link: /blog/links
   - name: Photos
     link: /blog/photos
+    requires: photos  # only shown once there's at least one photo post
   # - name: Unexplored Games
   #   link: https://www.unexplored-games.com/
   # - name: Contact
