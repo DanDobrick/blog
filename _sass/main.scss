@@ -7,7 +7,7 @@ body {
 	/* Margin bottom by footer height */
 	margin-bottom: 8em;
 	padding-top: 4.5em;
-	background-color: rgb(235, 233, 233);
+	background-color: #f4efe6;
 }
 
 #bootstrap-overrides {
@@ -90,6 +90,9 @@ body {
 .container {
 	width: 65%;
 	margin: auto;
+	background-color: #fffdf9;
+	padding: 1.5em 1em 1em;
+	border-radius: 4px;
 	font-size: 1.3em;
 }
 
