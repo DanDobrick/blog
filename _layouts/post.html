@@ -2,17 +2,18 @@
 layout: default
 is_post: true
 ---
-{% if page.no_image %}
+{% if page.photo %}
+{% elsif page.no_image %}
 <img alt="{{ page.title }}" src="{{ site.baseurl}}/assets/images/default.jpg" class="img-responsive top-image">
 {% else %}
-<img alt="{{ page.title }}" src="{{ site.baseurl}}/assets/images/{{page.id}}/top.jpg" class="img-responsive top-image">
+<img alt="{{ page.title }}" src="{{ site.baseurl}}/assets/images/{{page.id}}/top.jpg" class="img-responsive top-image{% if page.photo %} photo-post-image{% endif %}">
 {% endif %}
 
-<h1 class="post-title">{{page.title | markdownify | remove: '<p>' | remove: '</p>'}}</h1>
+<h1 class="post-title{% if page.photo %} photo-title{% endif %}">{{page.title | markdownify | remove: '<p>' | remove: '</p>'}}</h1>
 <div class="post-container">
   <p>
-    <strong>{{ page.published | date: '%B %d, %Y' }}</strong> ( last updated : {{ page.date | date: '%B %d, %Y' }} )
-    <br>
+    <strong>{{ page.published | date: '%B %d, %Y' }}</strong>{% unless page.photo %} ( last updated : {{ page.date | date: '%B %d, %Y' }} ){% endunless %}
+    {% unless page.photo %}<br>{% endunless %}
     {% for tag in page.tags %}
     <a class="label label-default" href="{{ site.baseurl }}/tags/#{{ tag | slugify }}">{{ tag }}</a>
     {% endfor %}
@@ -25,11 +26,52 @@ is_post: true
     </a>
   </p>
   {% endif %}
-  <hr />
+  {% if page.photo %}
+  <a class="photo-zoom photo-stage" href="{{ site.baseurl }}/assets/images/{{page.id}}/top.jpg">
+    <img alt="{{ page.title | strip_html }}" src="{{ site.baseurl }}/assets/images/{{page.id}}/top.jpg" class="img-responsive photo-post-image">
+  </a>
+  {% else %}<hr />{% endif %}
 
   {{ content | markdownify}}
+
+  {% if page.photo %}
+    {% assign photos = site.posts | where: "photo", true %}
+    {% for p in photos %}
+      {% if p.id == page.id %}
+        {% assign prev_index = forloop.index0 | minus: 1 %}
+        {% unless forloop.first %}{% assign newer = photos[prev_index] %}{% endunless %}
+        {% assign older = photos[forloop.index] %}
+      {% endif %}
+    {% endfor %}
+    <nav class="photo-nav">
+      <div class="photo-nav-side">
+        {% if newer %}
+        <a href="{{ newer.url | prepend: site.baseurl }}"><img alt="" src="{{ site.baseurl }}/assets/images/{{ newer.id }}/thumb.jpg"><span>&larr; Newer</span></a>
+        {% endif %}
+      </div>
+      <a class="photo-nav-all" href="{{ site.baseurl }}/photos/">All photos</a>
+      <div class="photo-nav-side photo-nav-older">
+        {% if older %}
+        <a href="{{ older.url | prepend: site.baseurl }}"><span>Older &rarr;</span><img alt="" src="{{ site.baseurl }}/assets/images/{{ older.id }}/thumb.jpg"></a>
+        {% endif %}
+      </div>
+    </nav>
+    <script>
+      // Click the photo to view it at full size; click again (or Esc) to close.
+      $(function () {
+        $('.photo-zoom').on('click', function (e) {
+          e.preventDefault();
+          var $o = $('<div class="photo-lightbox"><img src="' + this.href + '" alt=""></div>');
+          function close() { $o.remove(); $(document).off('keydown.lb'); }
+          $o.on('click', close);
+          $(document).on('keydown.lb', function (ev) { if (ev.key === 'Escape') close(); });
+          $('body').append($o);
+        });
+      });
+    </script>
+  {% endif %}
   <div class='related-posts'>
-    {% if page.collection == "unexplored_games" %}
+    {% if page.collection == "unexplored_games" or page.photo %}
     {% else %}
       {% include contact_and_donate.html %}
 

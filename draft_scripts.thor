@@ -50,6 +50,70 @@ DRAFT
     puts "Draft '#{file_name}' created"
   end
 
+  desc 'photo TITLE PHOTO_PATH', 'Creates a photo-only draft from an image file (converted to JPEG, resized, saved as top.jpg plus a square thumb.jpg)'
+  method_option :tags, aliases: '-t', desc: 'Adds tags', type: :array, default: ['photo']
+  method_option :max_width, aliases: '-w', desc: 'Max width/height in pixels for the longest side', type: :numeric, default: 2000
+  method_option :focus, aliases: '-f', desc: 'Vertical focus of the home page banner crop, 0 (top) to 100 (bottom). Default: auto-detected', type: :numeric
+  method_option :quality, aliases: '-q', desc: 'JPEG quality (1-100)', type: :numeric, default: 85
+  def photo(title, photo_path)
+    source = File.expand_path(photo_path)
+    abort "Photo not found: #{source}" unless File.file?(source)
+    abort "This command needs macOS's `sips` tool." unless system('which sips > /dev/null 2>&1')
+
+    today = ::Date.today
+    slug = title.downcase.gsub(' ', '-')
+    file_name = "#{today}-#{slug}.md"
+    titleized_title = titleize(title)
+    dir = "./assets/images/posts/#{slug}"
+    dest = "#{dir}/top.jpg"
+    abort "#{dest} already exists; pick a different title." if File.exist?(dest)
+
+    # Convert whatever we were given (HEIC, PNG, JPG...) to JPEG, shrinking
+    # only if the longest side is bigger than max_width.
+    FileUtils.mkdir_p(dir)
+    dims = `sips -g pixelWidth -g pixelHeight "#{source}"`.scan(/pixel(?:Width|Height): (\d+)/).flatten.map(&:to_i)
+    args = ['-s', 'format', 'jpeg', '-s', 'formatOptions', options[:quality].to_s]
+    args += ['--resampleHeightWidthMax', options[:max_width].to_s] if dims.max.to_i > options[:max_width]
+    ok = system('sips', *args, source, '--out', dest, out: File::NULL)
+    abort 'Image conversion failed' unless ok
+
+    # Square, center-cropped thumbnail for the home page feed and /photos/ grid.
+    out_dims = `sips -g pixelWidth -g pixelHeight "#{dest}"`.scan(/pixel(?:Width|Height): (\d+)/).flatten.map(&:to_i)
+    side = out_dims.min
+    thumb_size = [side, 600].min
+    thumb = "#{dir}/thumb.jpg"
+    thumb_ok = system('sips', '-c', side.to_s, side.to_s, dest, '--out', thumb, out: File::NULL) &&
+               system('sips', '--resampleHeightWidth', thumb_size.to_s, thumb_size.to_s,
+                      '-s', 'formatOptions', '80', thumb, out: File::NULL)
+    abort 'Thumbnail creation failed' unless thumb_ok
+
+    focus = options[:focus]
+    if focus.nil?
+      puts 'Detecting the interesting part of the photo (first run takes a few seconds)...'
+      detected = `swift #{File.expand_path('scripts/focus.swift', __dir__)} "#{dest}" 2>/dev/null`.strip
+      focus = detected =~ /\A\d+\z/ ? detected.to_i : 50
+    end
+    focus = focus.to_i.clamp(0, 100)
+
+    draft = <<-DRAFT
+---
+title: #{titleized_title}
+date: #{today}
+published: #{today}
+tags: #{options[:tags]}
+is_post: true
+photo: true
+photo_focus: #{focus}%
+excerpt: ""
+---
+<!-- Optional one-line caption goes here. Delete this comment (and leave the body empty) for a photo-only post. -->
+DRAFT
+
+    File.open("./_drafts/#{file_name}", 'w') { |f| f.write(draft) }
+    puts "Draft '#{file_name}' created"
+    puts "Photo saved to #{dest} (+ thumb.jpg), banner focus #{focus}% (edit photo_focus in the draft to adjust)"
+  end
+
   desc 'publish', 'Publishes file from the drafts folder'
   def publish
     files = Dir['./_drafts/*'].reject do |file|

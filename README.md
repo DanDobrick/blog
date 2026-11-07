@@ -12,6 +12,25 @@ Publish a draft: `thor draft:publish`
 
 For more options see `thor help draft`
 
+### Photo posts
+
+A photo post is a post that is just a picture (with an optional one-line caption). Create one with:
+
+```
+bundle exec thor draft:photo "Title in quotes" path/to/photo.heic
+```
+
+This will:
+- convert the photo to a JPEG (HEIC, PNG, etc. are fine) and shrink it so the longest side is at most 2000px (smaller photos are not enlarged)
+- save it as `assets/images/posts/<title-slug>/top.jpg`, plus a 600px center-cropped square `thumb.jpg` used on the home page and the `/photos/` grid
+- create `_drafts/<date>-<title-slug>.md` with `photo: true` and a `photo` tag
+
+In the home page feed a photo post looks like a normal card, with a wide banner strip of the photo. Which strip is chosen automatically (`scripts/focus.swift` uses macOS Vision saliency to find the main subject); override it with `-f 0-100` (0 = top, 100 = bottom) or by editing `photo_focus` in the draft. All photo posts are collected on the `/photos/` page (linked in the nav).
+
+Then, optionally add a caption to the draft (or just delete the placeholder comment for no text), preview with `bundle exec jekyll serve --drafts`, and run `thor draft:publish` as usual.
+
+Options: `-f 40` (banner focus), `-t tag1 tag2` (replaces the default `photo` tag), `-w 1600` (max pixel size), `-q 90` (JPEG quality). Needs macOS (uses the built-in `sips`). Note: `sips` doesn't strip EXIF data, so location info in the original photo may remain in the saved JPEG.
+
 ## Notes for writing posts
 - To add classes to images, use the following syntax:
 `![alt-text](path/to-/image.ext){: .class-name}`

@@ -1,0 +1,13 @@
+---
+title: Photos
+permalink: /photos/
+---
+<div class="photo-grid">
+	{% for post in site.posts %}
+		{% if post.photo %}
+		<a class="photo-grid-item" href="{{ post.url | prepend: site.baseurl }}" title="{{ post.title | strip_html }}">
+			<img alt="{{ post.title | strip_html }}" src="{{ site.baseurl }}/assets/images/{{ post.id }}/thumb.jpg" loading="lazy">
+		</a>
+		{% endif %}
+	{% endfor %}
+</div>
